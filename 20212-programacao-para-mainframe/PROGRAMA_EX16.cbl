@@ -1,5 +1,5 @@
       ******************************************************************
-      * Author: CLAUDIO BENOSSI
+      * Author: Ana Beatriz Barbosa Alves
       * Date: 06/09/2021
       * Purpose: TRABALHANDO COM ARQUIVOS DE DADOS INDEXADOS - EXCLUIR
       * Tectonics: cobc
@@ -10,7 +10,8 @@
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.
            SELECT PRODUTOS ASSIGN TO
-               'C:\programas\ARQUIVOS\produtos.txt'
+              'D:\GitHub\fatec\20212-programacao-para-mainframe\Arquivos
+      -        '\produtos.txt'
            ORGANIZATION IS INDEXED
            ACCESS IS RANDOM
            RECORD KEY IS COD-PRODUTO

@@ -1,5 +1,5 @@
       ******************************************************************
-      * Author: CLAUDIO BENOSSI
+      * Author: Ana Beatriz Barbosa Alves
       * Date: 06/09/2021
       * Purpose: TRABALHANDO COM ARQUIVOS DE DADOS INDEXADOS - INCLUIR
       * Tectonics: cobc

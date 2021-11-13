@@ -48,13 +48,14 @@
       ******************
       *
        MENU-001.
-            DISPLAY '-------------------[ MENU ]-------------------'
+            DISPLAY '|---[ MENU ]---|'
             DISPLAY "| 1 - INCLUIR  |"
             DISPLAY "| 2 - ALTERAR  |"
             DISPLAY "| 3 - EXCLUIR  |"
             DISPLAY "| 4 - CONSULTA |"
             DISPLAY "| 5 - LISTAR   |"
             DISPLAY "| 99 - SAIR    |"
+            DISPLAY '|--------------|'
             DISPLAY " "
             ACCEPT W-OPCAO
             IF W-OPCAO = 1
