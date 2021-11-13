@@ -10,7 +10,8 @@
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.
            SELECT PRODUTOS ASSIGN TO
-               'C:\programas\ARQUIVOS\produtos.txt'
+              'D:\GitHub\fatec\20212-programacao-para-mainframe\Arquivos
+      -        '\produtos.txt'
            ORGANIZATION IS INDEXED
            ACCESS IS DYNAMIC
            RECORD KEY IS COD-PRODUTO

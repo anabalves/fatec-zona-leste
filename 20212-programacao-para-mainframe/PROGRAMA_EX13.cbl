@@ -10,7 +10,8 @@
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.
            SELECT PRODUTOS ASSIGN TO
-               'C:\programas\ARQUIVOS\produtos.txt'
+              'D:\GitHub\fatec\20212-programacao-para-mainframe\Arquivos
+      -        '\produtos.txt'
            ORGANIZATION IS INDEXED
            ACCESS IS RANDOM
            RECORD KEY IS COD-PRODUTO
@@ -32,7 +33,7 @@
             IF WS-FS EQUAL 35 THEN
                 OPEN OUTPUT PRODUTOS
             END-IF
-                IF WS-FS EQUAL ZEROS
+            IF WS-FS EQUAL ZEROS
                 DISPLAY 'INFORME O CODIGO DO PRODUTO:'
                 ACCEPT COD-PRODUTO
                 DISPLAY 'INFORME O NOME DO PRODUTO'

@@ -35,7 +35,7 @@ public class AlunoBoundary extends Application {
 	private Button btnSalvar = new Button("Salvar");
 	private Button btnPesquisar = new Button("Pesquisar");
 
-	private AlunoControl control = new AlunoControl();   // Composição
+	private AlunoControl control = new AlunoControl();   // ComposiÃ§Ã£o
 
 	private TableView<Aluno> table = new TableView<>();
 
@@ -58,7 +58,7 @@ public class AlunoBoundary extends Application {
 			return new ReadOnlyStringWrapper(strData);
 		} );
 
-		TableColumn<Aluno, String> col5 = new TableColumn<>("Ações");
+		TableColumn<Aluno, String> col5 = new TableColumn<>("AÃ§Ãµes");
 		col5.setCellValueFactory( new PropertyValueFactory<>("DUMMY") );
 		col5.setCellFactory( (tbCol) ->
 		new TableCell<Aluno, String>() {
@@ -72,7 +72,7 @@ public class AlunoBoundary extends Application {
 					btn.setOnAction( (e) -> {
 						Aluno a = getTableView().getItems().get(getIndex());
 						Alert alert = new Alert(Alert.AlertType.WARNING,
-								"Você confirma a remoção do Aluno Id " +
+								"Vocï¿½ confirma a remoï¿½ï¿½o do Aluno Id " +
 										a.getId(), ButtonType.OK, ButtonType.CANCEL);
 						Optional<ButtonType> clicado = alert.showAndWait();
 						if (clicado.isPresent() &&
@@ -155,7 +155,7 @@ public class AlunoBoundary extends Application {
 
 		stage.setScene(scene);
 		stage.setResizable(false);
-		stage.setTitle("Gestão de Alunos");
+		stage.setTitle("GestÃ£o de Alunos");
 		stage.show();
 	}
 
