@@ -98,7 +98,7 @@ WHERE
 	C.NOME_DISCIPLINA = 'FISICA';
 
 /* 3). Queremos selecionar todos os nomes de alunos cadastrados que cursam física e o andar que se encontra a classe dos mesmos. */
-/* Preste atenção ao detalhe da concatenação de uma string "andar" junto à coluna do número do andar (Apenas para estética do resultado). */
+/* Preste atenção ao detalhe da concatenação de uma string 'andar' junto à coluna do número do andar (Apenas para estética do resultado). */
 SELECT 
 	A.NOME_ALUNO, A.ID_CLASSE, CONCAT(D.ID_ANDAR, 'º Andar') AS ANDAR
 FROM 
