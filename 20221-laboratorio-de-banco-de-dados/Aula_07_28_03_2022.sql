@@ -1,0 +1,467 @@
+DROP DATABASE IF EXISTS DB_ESCOLA;
+
+/* 1) Criacao do banco DB_ESCOLA_P1 */
+CREATE DATABASE DB_ESCOLA;
+
+/* 2) Conecta ao banco DB_ESCOLA */
+USE DB_ESCOLA;
+
+/* 3) Criacao da tabela TB_DEPTO */
+CREATE TABLE TB_DEPTO (
+    COD_DEPTO CHAR(5),
+    NOME_DEPTO VARCHAR(40)
+);
+
+/* 4) Criacao da tabela TB_DISCIPLINA */
+CREATE TABLE TB_DISCIPLINA (
+    COD_DEPTO CHAR(5),
+    NUM_DISC INT,
+    NOME_DISC VARCHAR(40),
+    CREDITO_DISC INT
+);
+
+/* 5) Criacao da tabela TB_PRE_REQ */
+CREATE TABLE TB_PRE_REQ (
+    COD_DEPTO_PRE_REQ CHAR(5),
+    NUM_DISC_PRE_REQ INT,
+    COD_DEPTO CHAR(5),
+    NUM_DISC INT
+);
+
+/* 6) Criacao da tabela TB_TURMA */
+CREATE TABLE TB_TURMA (
+    ANO_SEM INT,
+    COD_DEPTO CHAR(5),
+    NUM_DISC INT,
+    SIGLA_TUR CHAR(2),
+    CAPAC_TUR INT
+);
+
+/* 7) Criacao da tabela TB_HORARIO */
+CREATE TABLE TB_HORARIO (
+    ANO_SEM INT,
+    COD_DEPTO CHAR(5),
+    NUM_DISC INT,
+    SIGLA_TUR CHAR(2),
+    DIA_SEM INT,
+    HORA_INICIO INT,
+    NUM_SALA INT,
+    COD_PRED INT,
+    NUM_HORAS INT
+);
+
+/* 8) Criacao da tabela TB_PREDIO */
+CREATE TABLE TB_PREDIO (
+    COD_PRED INT,
+    NOME_PRED VARCHAR(40)
+);
+
+/* 9) Criacao da tabela TB_SALA */
+CREATE TABLE TB_SALA (
+    COD_PRED INT,
+    NUM_SALA INT,
+    DESCRICAO_SALA VARCHAR(40),
+    CAPAC_SALA INT
+);
+
+/* 10) Criacao da tabela TB_PROFESSOR */
+CREATE TABLE TB_PROFESSOR (
+    COD_PROF INT,
+    COD_DEPTO CHAR(5),
+    COD_TIT INT,
+    NOME_PROF VARCHAR(40)
+);
+
+/* 11) Criacao da tabela TB_PROF_TURMA */
+CREATE TABLE TB_PROF_TURMA (
+    ANO_SEM INT,
+    COD_DEPTO CHAR(5),
+    NUM_DISC INT,
+    SIGLA_TUR CHAR(2),
+    COD_PROF INT
+);
+
+/* 12) Criacao da tabela TB_TITULACAO */
+CREATE TABLE TB_TITULACAO (
+    COD_TIT INT,
+    NOME_TIT VARCHAR(40)
+);
+
+/* 13) Adicionar PK e FK nas tabelas */
+ALTER TABLE TB_DEPTO
+ADD CONSTRAINT PK_TB_DEPTO 
+PRIMARY KEY (COD_DEPTO);
+
+ALTER TABLE TB_DISCIPLINA
+ADD CONSTRAINT PK_TB_DISCIPLINA 
+PRIMARY KEY (COD_DEPTO, NUM_DISC);
+
+ALTER TABLE TB_DISCIPLINA
+ADD CONSTRAINT FK_DISCIPLI_RELATION_DEPTO
+FOREIGN KEY (COD_DEPTO) 
+REFERENCES TB_DEPTO(COD_DEPTO)
+ON DELETE RESTRICT;
+
+ALTER TABLE TB_PRE_REQ
+ADD CONSTRAINT PK_TB_DISCIPLINA 
+PRIMARY KEY (COD_DEPTO_PRE_REQ, NUM_DISC_PRE_REQ, COD_DEPTO, NUM_DISC);
+
+ALTER TABLE TB_PRE_REQ
+ADD CONSTRAINT FK_PREREQ_TEM_PRE_DISCIPLI
+FOREIGN KEY (COD_DEPTO_PRE_REQ, NUM_DISC_PRE_REQ) 
+REFERENCES TB_DISCIPLINA(COD_DEPTO, NUM_DISC)
+ON DELETE RESTRICT;
+
+ALTER TABLE TB_PRE_REQ
+ADD CONSTRAINT FK_PREREQ_EQ_PRE_DISCIPLI
+FOREIGN KEY (COD_DEPTO, NUM_DISC) 
+REFERENCES TB_DISCIPLINA(COD_DEPTO, NUM_DISC)
+ON DELETE RESTRICT;
+
+ALTER TABLE TB_TURMA
+ADD CONSTRAINT PK_TB_TURMA 
+PRIMARY KEY (ANO_SEM, COD_DEPTO, NUM_DISC, SIGLA_TUR);
+
+ALTER TABLE TB_TURMA
+ADD CONSTRAINT FK_TURMA_RELATION_DISCIPLI
+FOREIGN KEY (COD_DEPTO, NUM_DISC) 
+REFERENCES TB_DISCIPLINA(COD_DEPTO, NUM_DISC);
+
+ALTER TABLE TB_HORARIO
+ADD CONSTRAINT PK_TB_HORARIO 
+PRIMARY KEY (ANO_SEM, COD_DEPTO, NUM_DISC, SIGLA_TUR, DIA_SEM, HORA_INICIO);
+
+ALTER TABLE TB_HORARIO
+ADD CONSTRAINT FK_HORARIO_RELATION_TURMA  
+FOREIGN KEY (ANO_SEM, COD_DEPTO, NUM_DISC, SIGLA_TUR) 
+REFERENCES TB_TURMA(ANO_SEM, COD_DEPTO, NUM_DISC, SIGLA_TUR);
+
+ALTER TABLE TB_PREDIO
+ADD CONSTRAINT PK_TB_PREDIO 
+PRIMARY KEY (COD_PRED);
+
+ALTER TABLE TB_SALA
+ADD CONSTRAINT PK_TB_SALA 
+PRIMARY KEY (COD_PRED, NUM_SALA);
+
+ALTER TABLE TB_SALA
+ADD CONSTRAINT FK_SALA_RELATION_PREDIO
+FOREIGN KEY (COD_PRED)
+REFERENCES TB_PREDIO(COD_PRED)
+ON DELETE RESTRICT;
+
+ALTER TABLE TB_PROFESSOR
+ADD CONSTRAINT PK_TB_PROFESSOR
+PRIMARY KEY (COD_PROF);
+
+ALTER TABLE TB_PROFESSOR
+ADD CONSTRAINT FK_PROFESSOR_RELATION_DEPTO
+FOREIGN KEY (COD_DEPTO)
+REFERENCES TB_DEPTO(COD_DEPTO)
+ON DELETE RESTRICT;
+
+ALTER TABLE TB_PROF_TURMA
+ADD CONSTRAINT PK_TB_PROF_TURMA 
+PRIMARY KEY (ANO_SEM, COD_DEPTO, NUM_DISC, SIGLA_TUR, COD_PROF);
+
+ALTER TABLE TB_PROF_TURMA
+ADD CONSTRAINT FK_PROFTURM_PROFTURMA_PROFESSOR
+FOREIGN KEY (COD_PROF)
+REFERENCES TB_PROFESSOR(COD_PROF)
+ON DELETE RESTRICT;
+
+ALTER TABLE TB_PROF_TURMA
+ADD CONSTRAINT FK_PROFTURM_PROFTURMA_TURMA
+FOREIGN KEY (ANO_SEM, COD_DEPTO, NUM_DISC, SIGLA_TUR)
+REFERENCES TB_TURMA(ANO_SEM, COD_DEPTO, NUM_DISC, SIGLA_TUR)
+ON DELETE RESTRICT;
+
+ALTER TABLE TB_TITULACAO
+ADD CONSTRAINT PK_TB_TITULACAO 
+PRIMARY KEY (COD_TIT);
+
+ALTER TABLE TB_PROFESSOR
+ADD CONSTRAINT FK_PROFESSOR_RELATION_TITULACAO
+FOREIGN KEY (COD_TIT)
+REFERENCES TB_TITULACAO(COD_TIT)
+ON DELETE RESTRICT;
+
+ALTER TABLE TB_HORARIO
+ADD CONSTRAINT FK_HORARIO_RELATION_SALA
+FOREIGN KEY (COD_PRED, NUM_SALA)
+REFERENCES TB_SALA(COD_PRED, NUM_SALA)
+ON DELETE RESTRICT;
+
+/* 14) Inserir Dados Na Tabela TB_DEPTO */
+INSERT INTO TB_DEPTO(COD_DEPTO, NOME_DEPTO) VALUES  
+    ('INF01', 'Informática')
+;
+
+/* 15) Inserir Dados Na Tabela TB_DISCIPLINA */
+INSERT INTO TB_DISCIPLINA(COD_DEPTO, NUM_DISC, NOME_DISC, CREDITO_DISC) VALUES 
+    ('INF01', 0001, 'Algoritmos e Estrutura de Dados I', 0003),
+    ('INF01', 0002, 'Algoritmos e Teoria dos Grafos', 0003),
+    ('INF01', 0003, 'Metodologia Científica', 0003),
+	('INF01', 0004, 'Redes de Computadores I', 0003),
+	('INF01', 0005, 'Introdução à Teoria da Computação', 0003),
+    ('INF01', 0006, 'Circuitos Lógicos', 0003),
+    ('INF01', 0007, 'Técnicas Alternativas de Programação', 0003),
+    ('INF01', 0008, 'Software Básico', 0003),
+    ('INF01', 0009, 'Algoritmos e Estruturas de Dados II', 0003),
+    ('INF01', 0010, 'Oficina de Computação', 0003),
+    ('INF01', 0011, 'Redes de Computadores II', 0003),
+    ('INF01', 0012, 'Engenharia de Software', 0003),
+    ('INF01', 0013, 'Projeto de Software', 0003),
+	('INF01', 0014, 'Introdução à Computação Científica', 0003),
+    ('INF01', 0015, 'Análise de Algoritmos', 0003),
+    ('INF01', 0016, 'Inteligência Artificial', 0003),
+    ('INF01', 0017, 'Algoritmos e Estruturas de Dados III', 0003),
+    ('INF01', 0018, 'Projetos Digitais e Microprocessadores', 0003),
+    ('INF01', 0019, 'Construção de Compiladores', 0003),
+    ('INF01', 0020, 'Sistemas Operacionais', 0003),
+    ('INF01', 0021, 'Sistemas de Bancos de Dados', 0003),
+    ('INF01', 0022, 'Teoria de Sistemas', 0003),
+    ('INF01', 0023, 'Engenharia de Requisitos', 0003),
+    ('INF01', 0024, 'Matemática Discreta', 0003),
+    ('INF01', 0025, 'Qualidade de Software', 0003),
+    ('INF01', 0026, 'Criptografia', 0003),
+    ('INF01', 0027, 'Circuitos Digitais', 0003),
+    ('INF01', 0028, 'Arquitetura de Computadores', 0003),
+    ('INF01', 0029, 'Construção de Compiladores', 0003),
+    ('INF01', 0030, 'Introdução à Computação Científica', 0003),
+    ('INF01', 0031, 'Programação Paralela', 0003),
+    ('INF01', 0032, 'Interação Humano-Computador', 0003),
+    ('INF01', 0033, 'Design de Software', 0003),
+    ('INF01', 0034, 'Programação Web', 0003),
+    ('INF01', 0035, 'Teste de Software', 0003),
+    ('INF01', 0036, 'Programação de Dispositivos Móveis', 0003),
+    ('INF01', 0037, 'Biometria e Vigilância Computacional', 0003),
+    ('INF01', 0038, 'Trabalho de Conclusão de Curso I', 0003),
+    ('INF01', 0039, 'Sistemas Avançados de Banco de Dados', 0003),
+    ('INF01', 0040, 'Processamento de Imagens', 0003),
+    ('INF01', 0041, 'Sistemas Distribuídos', 0003),
+    ('INF01', 0042, 'Gerenciamento de Redes de Computadores', 0003),
+    ('INF01', 0043, 'Inovação tecnológica', 0003),
+    ('INF01', 0044, 'Aprendizado de Máquina', 0003),
+    ('INF01', 0045, 'Avaliação de Desempenho', 0003),
+    ('INF01', 0046, 'Estágio Supervisionado', 0003),
+    ('INF01', 0047, 'Arquiteturas de Alto Desempenho', 0003),
+    ('INF01', 0048, 'Trabalho de Conclusão de Curso II', 0003)
+;
+
+/* 16) Inserir Dados Na Tabela TB_PRE_REQ */
+INSERT INTO TB_PRE_REQ(COD_DEPTO_PRE_REQ, NUM_DISC_PRE_REQ, COD_DEPTO, NUM_DISC) VALUES
+	('INF01', 0001, 'INF01', 0009),
+    ('INF01', 0009, 'INF01', 0017),
+    ('INF01', 0004, 'INF01', 0011),
+    ('INF01', 0012, 'INF01', 0023),
+	('INF01', 0021, 'INF01', 0039),
+	('INF01', 0038, 'INF01', 0048)
+;
+
+/* 17) Inserir Dados Na Tabela TB_TURMA */
+INSERT INTO TB_TURMA(ANO_SEM, COD_DEPTO, NUM_DISC, SIGLA_TUR, CAPAC_TUR) VALUES
+	(20021, 'INF01', 0001, 'T1', 80),
+    (20021, 'INF01', 0002, 'T1', 80),
+    (20021, 'INF01', 0003, 'T1', 80),
+    (20021, 'INF01', 0004, 'T1', 80),
+    (20021, 'INF01', 0005, 'T1', 80),
+    (20021, 'INF01', 0006, 'T1', 80),
+    (20021, 'INF01', 0007, 'T1', 80),
+    (20021, 'INF01', 0008, 'T1', 80),
+    (20022, 'INF01', 0009, 'T2', 80),
+    (20022, 'INF01', 0010, 'T2', 80),
+    (20022, 'INF01', 0011, 'T2', 80),
+    (20022, 'INF01', 0012, 'T2', 80),
+    (20022, 'INF01', 0013, 'T2', 80),
+    (20022, 'INF01', 0014, 'T2', 80),
+    (20022, 'INF01', 0015, 'T2', 80),
+    (20022, 'INF01', 0016, 'T2', 80),
+    (20031, 'INF01', 0017, 'T3', 80),
+    (20031, 'INF01', 0018, 'T3', 80),
+    (20031, 'INF01', 0019, 'T3', 80),
+    (20031, 'INF01', 0020, 'T3', 80),
+    (20031, 'INF01', 0021, 'T3', 80),
+    (20031, 'INF01', 0022, 'T3', 80),
+    (20031, 'INF01', 0023, 'T3', 80),
+    (20031, 'INF01', 0024, 'T3', 80),
+    (20032, 'INF01', 0025, 'T4', 80),
+    (20032, 'INF01', 0026, 'T4', 80),
+    (20032, 'INF01', 0027, 'T4', 80),
+    (20032, 'INF01', 0028, 'T4', 80),
+    (20032, 'INF01', 0029, 'T4', 80),
+    (20032, 'INF01', 0030, 'T4', 80),
+    (20032, 'INF01', 0031, 'T4', 80),
+    (20032, 'INF01', 0032, 'T4', 80),
+    (20041, 'INF01', 0033, 'T5', 80),
+    (20041, 'INF01', 0034, 'T5', 80),
+    (20041, 'INF01', 0035, 'T5', 80),
+    (20041, 'INF01', 0036, 'T5', 80),
+    (20041, 'INF01', 0037, 'T5', 80),
+    (20041, 'INF01', 0038, 'T5', 80),
+    (20041, 'INF01', 0039, 'T5', 80),
+    (20041, 'INF01', 0040, 'T5', 80),
+    (20042, 'INF01', 0041, 'T6', 80),
+    (20042, 'INF01', 0042, 'T6', 80),
+    (20042, 'INF01', 0043, 'T6', 80),
+    (20042, 'INF01', 0044, 'T6', 80),
+    (20042, 'INF01', 0045, 'T6', 80),
+    (20042, 'INF01', 0046, 'T6', 80),
+    (20042, 'INF01', 0047, 'T6', 80),
+    (20042, 'INF01', 0048, 'T6', 80)
+;
+
+/* 18) Inserir Dados Na Tabela TB_PREDIO */
+INSERT INTO TB_PREDIO(COD_PRED, NOME_PRED) VALUES
+	(0001, 'Informática - aulas')
+;
+
+/* 19) Inserir Dados Na Tabela TB_SALA */
+INSERT INTO TB_SALA(COD_PRED, NUM_SALA, DESCRICAO_SALA, CAPAC_SALA) VALUES
+	(0001, 0101, 'Laboratorio Pratica',  80),
+    (0001, 0102, 'Sala teorica', 80),
+    (0001, 0103, 'Laboratorio Pratica', 80),
+    (0001, 0104, 'Sala teorica', 80),
+    (0001, 0105, 'Laboratorio Pratica', 80),
+    (0001, 0106, 'Sala teorica', 80),
+    (0001, 0107, 'Laboratorio Pratica', 80),
+    (0001, 0108, 'Sala teorica', 80)
+;
+
+/* 20) Inserir Dados Na Tabela TB_TITULACAO */
+INSERT INTO TB_TITULACAO(COD_TIT, NOME_TIT) VALUES
+	(0001, 'Assistente'),
+    (0002, 'Colaborador'),
+    (0003, 'Adjunto'),
+    (0004, 'Titular'),
+    (0005, 'Especialista'),
+    (0006, 'Mestre'),
+    (0007, 'Doutor')
+;
+
+/* 21) Inserir Dados Na Tabela TB_HORARIO */
+INSERT INTO TB_HORARIO(ANO_SEM, COD_DEPTO, NUM_DISC, SIGLA_TUR, DIA_SEM, HORA_INICIO, NUM_SALA, COD_PRED, NUM_HORAS) VALUES
+	(20021, 'INF01', 0001, 'T1', 2, 19, 0101, 0001, 2),
+    (20021, 'INF01', 0002, 'T1', 2, 21, 0102, 0001, 2),
+    (20021, 'INF01', 0003, 'T1', 3, 19, 0103, 0001, 4),
+    (20021, 'INF01', 0004, 'T1', 4, 19, 0101, 0001, 4),
+    (20021, 'INF01', 0005, 'T1', 5, 19, 0105, 0001, 2),
+    (20021, 'INF01', 0006, 'T1', 5, 21, 0106, 0001, 2),
+    (20021, 'INF01', 0007, 'T1', 6, 19, 0107, 0001, 4),
+    (20021, 'INF01', 0008, 'T1', 7, 08, 0108, 0001, 4),
+    
+    (20022, 'INF01', 0009, 'T2', 2, 19, 0101, 0001, 2),
+    (20022, 'INF01', 0010, 'T2', 2, 21, 0102, 0001, 2),
+    (20022, 'INF01', 0011, 'T2', 3, 19, 0103, 0001, 4),
+    (20022, 'INF01', 0012, 'T2', 4, 19, 0104, 0001, 4),
+    (20022, 'INF01', 0013, 'T2', 5, 19, 0105, 0001, 2),
+    (20022, 'INF01', 0014, 'T2', 5, 21, 0106, 0001, 2),
+    (20022, 'INF01', 0015, 'T2', 6, 19, 0107, 0001, 4),
+    (20022, 'INF01', 0016, 'T2', 7, 08, 0108, 0001, 4),
+    
+    (20031, 'INF01', 0017, 'T3', 2, 19, 0101, 0001, 2),
+    (20031, 'INF01', 0018, 'T3', 2, 21, 0102, 0001, 2),
+    (20031, 'INF01', 0019, 'T3', 3, 19, 0103, 0001, 4),
+    (20031, 'INF01', 0020, 'T3', 4, 19, 0104, 0001, 4),
+    (20031, 'INF01', 0021, 'T3', 5, 19, 0105, 0001, 2),
+    (20031, 'INF01', 0022, 'T3', 5, 21, 0106, 0001, 2),
+    (20031, 'INF01', 0023, 'T3', 6, 19, 0107, 0001, 4),
+    (20031, 'INF01', 0024, 'T3', 7, 08, 0108, 0001, 4),
+    
+	(20032, 'INF01', 0025, 'T4', 2, 19, 0101, 0001, 2),
+    (20032, 'INF01', 0026, 'T4', 2, 21, 0102, 0001, 2),
+    (20032, 'INF01', 0027, 'T4', 3, 19, 0103, 0001, 4),
+    (20032, 'INF01', 0028, 'T4', 4, 19, 0104, 0001, 4),
+    (20032, 'INF01', 0029, 'T4', 5, 19, 0105, 0001, 2),
+    (20032, 'INF01', 0030, 'T4', 5, 21, 0106, 0001, 2),
+    (20032, 'INF01', 0031, 'T4', 6, 19, 0107, 0001, 4),
+    (20032, 'INF01', 0032, 'T4', 7, 08, 0108, 0001, 4),
+    
+	(20041, 'INF01', 0033, 'T5', 2, 19, 0101, 0001, 2),
+    (20041, 'INF01', 0034, 'T5', 2, 21, 0102, 0001, 2),
+    (20041, 'INF01', 0035, 'T5', 3, 19, 0103, 0001, 4),
+    (20041, 'INF01', 0036, 'T5', 4, 19, 0104, 0001, 4),
+    (20041, 'INF01', 0037, 'T5', 5, 19, 0105, 0001, 2),
+    (20041, 'INF01', 0038, 'T5', 5, 21, 0106, 0001, 2),
+    (20041, 'INF01', 0039, 'T5', 6, 19, 0107, 0001, 4),
+    (20041, 'INF01', 0040, 'T5', 7, 08, 0108, 0001, 4),
+    
+	(20042, 'INF01', 0041, 'T6', 2, 19, 0101, 0001, 2),
+    (20042, 'INF01', 0042, 'T6', 2, 21, 0102, 0001, 2),
+    (20042, 'INF01', 0043, 'T6', 3, 19, 0103, 0001, 4),
+    (20042, 'INF01', 0044, 'T6', 4, 19, 0104, 0001, 4),
+    (20042, 'INF01', 0045, 'T6', 5, 19, 0105, 0001, 2),
+    (20042, 'INF01', 0046, 'T6', 5, 21, 0106, 0001, 2),
+    (20042, 'INF01', 0047, 'T6', 6, 19, 0107, 0001, 4),
+    (20042, 'INF01', 0048, 'T6', 7, 08, 0108, 0001, 4)
+;
+
+/* 22) Inserir Dados Na Tabela TB_PROFESSOR */
+INSERT INTO TB_PROFESSOR(COD_PROF, COD_DEPTO, COD_TIT, NOME_PROF) VALUES
+    (0001, 'INF01', 0006, 'Joilson de Souza Cardoso'),
+    (0002, 'INF01', 0006, 'Ana Maria dos Santos Scardino'),
+    (0003, 'INF01', 0007, 'Cristina Correa de Oliveira'),
+    (0004, 'INF01', 0006, 'Edson Saraiva de Almeida'),
+    (0005, 'INF01', 0006, 'Leandro Colevati dos Santos'),
+    (0006, 'INF01', 0006, 'Ricardo Satoshi Oyakawa'),
+    (0007, 'INF01', 0006, 'Roberto Nicolosi'),
+    (0008, 'INF01', 0007, 'Antunes'),
+    (0009, 'INF01', 0007, 'Paulo Cristiano de Oliveira')
+;
+
+/* 23) Inserir Dados Na Tabela TB_PROF_TURMA */
+INSERT INTO TB_PROF_TURMA(ANO_SEM, COD_DEPTO, NUM_DISC, SIGLA_TUR, COD_PROF) VALUES
+	(20021, 'INF01', 0001, 'T1', 0001),
+    (20021, 'INF01', 0002, 'T1', 0002),
+    (20021, 'INF01', 0003, 'T1', 0003),
+    (20021, 'INF01', 0004, 'T1', 0008),
+    (20021, 'INF01', 0005, 'T1', 0005),
+    (20021, 'INF01', 0006, 'T1', 0006),
+    (20021, 'INF01', 0007, 'T1', 0007),
+    (20021, 'INF01', 0008, 'T1', 0004),
+    
+	(20022, 'INF01', 0009, 'T2', 0001),
+    (20022, 'INF01', 0010, 'T2', 0002),
+    (20022, 'INF01', 0011, 'T2', 0003),
+    (20022, 'INF01', 0012, 'T2', 0004),
+    (20022, 'INF01', 0013, 'T2', 0005),
+    (20022, 'INF01', 0014, 'T2', 0006),
+    (20022, 'INF01', 0015, 'T2', 0007),
+    (20022, 'INF01', 0016, 'T2', 0009),
+    
+	(20031, 'INF01', 0017, 'T3', 0001),
+    (20031, 'INF01', 0018, 'T3', 0002),
+    (20031, 'INF01', 0019, 'T3', 0003),
+    (20031, 'INF01', 0020, 'T3', 0004),
+    (20031, 'INF01', 0021, 'T3', 0005),
+    (20031, 'INF01', 0022, 'T3', 0006),
+    (20031, 'INF01', 0023, 'T3', 0007),
+    (20031, 'INF01', 0024, 'T3', 0008),
+    
+	(20032, 'INF01', 0025, 'T4', 0001),
+    (20032, 'INF01', 0026, 'T4', 0002),
+    (20032, 'INF01', 0027, 'T4', 0003),
+    (20032, 'INF01', 0028, 'T4', 0004),
+    (20032, 'INF01', 0029, 'T4', 0005),
+    (20032, 'INF01', 0030, 'T4', 0006),
+    (20032, 'INF01', 0031, 'T4', 0007),
+    (20032, 'INF01', 0032, 'T4', 0008),
+    
+	(20041, 'INF01', 0033, 'T5', 0001),
+    (20041, 'INF01', 0034, 'T5', 0002),
+    (20041, 'INF01', 0035, 'T5', 0003),
+    (20041, 'INF01', 0036, 'T5', 0004),
+    (20041, 'INF01', 0037, 'T5', 0005),
+    (20041, 'INF01', 0038, 'T5', 0006),
+    (20041, 'INF01', 0039, 'T5', 0007),
+    (20041, 'INF01', 0040, 'T5', 0008),
+    
+	(20042, 'INF01', 0041, 'T6', 0001),
+    (20042, 'INF01', 0042, 'T6', 0002),
+    (20042, 'INF01', 0043, 'T6', 0003),
+    (20042, 'INF01', 0044, 'T6', 0004),
+    (20042, 'INF01', 0045, 'T6', 0005),
+    (20042, 'INF01', 0046, 'T6', 0006),
+    (20042, 'INF01', 0047, 'T6', 0007),
+    (20042, 'INF01', 0048, 'T6', 0008)
+;

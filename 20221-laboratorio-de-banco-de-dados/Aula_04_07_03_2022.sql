@@ -123,12 +123,12 @@ LEFT JOIN
 
 /* E-  Exercícios de SELECT (USE Clausula IN e/ou SUBSelect). Não pode usar junção. */
 /* 1.  Selecionar todos os nomes de professores que tenham ministrado disciplina para alunos que sejam do Estado do Piaui, cujo a classe tenha sido no terceiro andar.  */
-INSERT INTO TB_ESTADO(SIGLA_ESTADO, NOME_ESTADO) values ('PI', 'Piaui');
-INSERT INTO TB_CLASSE(ID_CLASSE, ID_ANDAR) values (4, 3); 
-INSERT INTO TB_ALUNO(COD_ALUNO, NOME_ALUNO, END_ALUNO, SIGLA_ESTADO, ID_CLASSE) values 
+INSERT INTO TB_ESTADO(SIGLA_ESTADO, NOME_ESTADO) VALUES ('PI', 'Piaui');
+INSERT INTO TB_CLASSE(ID_CLASSE, ID_ANDAR) VALUES (4, 3); 
+INSERT INTO TB_ALUNO(COD_ALUNO, NOME_ALUNO, END_ALUNO, SIGLA_ESTADO, ID_CLASSE) VALUES 
 (10, 'CESAR PEREIRA', 'RUA CINCO', 'PI', '4'),
 (11, 'FABIANA SILVA', 'RUA DEZ', 'PI', '1');
-insert into TB_ALUNO_DISCIPLINA (COD_ALUNO, ID_DISCIPLINA, NOTA_ALUNO) values
+INSERT INTO TB_ALUNO_DISCIPLINA (COD_ALUNO, ID_DISCIPLINA, NOTA_ALUNO) VALUES
 (10, 'MAT', 4),
 (10, 'FIS', 3),
 (11, 'POR', 2);
