@@ -17,7 +17,7 @@
 <h3 align="center"> 
 	<b>🚧  Bibliotecanos Em Construção  🚧</b>
   <br>
-  <img alt="Gif" title="#Gif" src="./.github/kakachi-reading.gif"/>
+  <img alt="Gif" title="#Gif" src="./.github/reading.gif"/>
 </h3>
 
 <p align="center">
