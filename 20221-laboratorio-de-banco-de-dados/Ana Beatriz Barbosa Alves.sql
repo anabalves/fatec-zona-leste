@@ -1,3 +1,76 @@
+-- Nome: Ana Beatriz Barbosa Alves / Impar RA: 1110482113012
+-- A - FUNCIONOU
+
+/* 
+Laboratório de Banco de Dados - Prof: Joilson de Souza Cardoso - Prova 01
+
+Orientações
+- Entregar a Prova no Pen Drive 
+- Arquivo deve ser salvo na raiz do Pen Drive 
+- Nome do Arquivo: Nome Completo.SQL
+- Dentro do arquivo na Primeira linha: Nome Completo e RA(Opcional) 
+- Escolher dentre as opções na 2ª Linha:
+								A - Funcionou 
+                                B - Compilou mas não funcionou 
+                                C - Nem Compilou 
+                                
+Enunciado:
+Criar procedure usando cursor para:
+Par: Para cada disciplina que possui pré-requisito, obter o nome da disciplina seguido do nome da disciplina que é seu pre-requisito                                
+Impar: Obter o numero de disciplinas do departamento denominado informatica.
+*/
+
+/* ****************** INICIO ******************** */
+/* Resposta: */
+/* Conecta ao banco DB_UNIVERSIDADE */
+USE DB_UNIVERSIDADE;
+
+DELIMITER $$
+CREATE PROCEDURE NUMERO_DE_DISC_DEPTO_INFORMATICA()
+BEGIN
+	DECLARE DONE INT DEFAULT 0;
+	DECLARE C_NUMERO_DISCIPLINAS_INFORMATICA INT;
+	DECLARE C1 CURSOR FOR 
+		SELECT
+			COUNT(NUM_DISC)
+		FROM
+			TB_DISCIPLINA A,
+			TB_DEPTO B
+		WHERE
+			A.COD_DEPTO = B.COD_DEPTO
+		AND 
+			NOME_DEPTO = 'Informática';
+
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET DONE = 1;
+    
+OPEN C1;
+
+	CREATE TEMPORARY TABLE TB_RESULT (
+		R_NUMERO_DISCIPLINAS_INFORMATICA INT
+	);
+
+	WHILE DONE != 1 DO
+		FETCH C1 INTO C_NUMERO_DISCIPLINAS_INFORMATICA;
+        INSERT INTO TB_RESULT (R_NUMERO_DISCIPLINAS_INFORMATICA) VALUES (C_NUMERO_DISCIPLINAS_INFORMATICA);
+    END WHILE;
+
+CLOSE C1;
+
+SELECT DISTINCT 
+	R_NUMERO_DISCIPLINAS_INFORMATICA AS NUMERO_DISCIPLINAS_INFORMATICA
+FROM 
+	TB_RESULT;
+   
+DROP TEMPORARY TABLE TB_RESULT;
+
+END$$
+DELIMITER ;
+
+CALL NUMERO_DE_DISC_DEPTO_INFORMATICA();
+DROP PROCEDURE NUMERO_DE_DISC_DEPTO_INFORMATICA;
+/* ****************** FIM ******************** */
+
+/* *************************** Foi necessário utilizar: *********************************** */
 DROP DATABASE IF EXISTS DB_UNIVERSIDADE;
 
 /* Criacao do banco DB_UNIVERSIDADE */

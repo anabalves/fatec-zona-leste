@@ -1,5 +1,5 @@
-/* Conecta ao banco DB_ESCOLA */
-USE DB_ESCOLA;
+/* Conecta ao banco DB_UNIVERSIDADE */
+USE DB_UNIVERSIDADE;
 
 /* Primeira Lista de Queries */
 /* Baseado no modelo final de dados criado em aula anterior. 
@@ -68,7 +68,7 @@ AND
 AND 
 	NUM_SALA = 101
 AND 
-	NOME_PRED = 'Informática - aulas'
+	NOME_PRED = 'Informática-Aulas'
 AND 
 	ANO_SEM = 20021;
 

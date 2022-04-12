@@ -1,5 +1,5 @@
-/* Conecta ao banco DB_ESCOLA */
-USE DB_ESCOLA;
+/* Conecta ao banco DB_UNIVERSIDADE */
+USE DB_UNIVERSIDADE;
 
 /* Criar Cursor Basico
 Utilizando o modelo criado em sala
