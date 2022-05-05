@@ -51,22 +51,6 @@ Projeto foi desenvolvido durante a disciplina de **Laboratório de Engenharia de
 
 ---
 
-## 🎲 Modelagem
-
-### Diagrama de Classe
-
-<p align="center">
-  <img alt="Diagrama de Classe" title="#DiagramaDeClasse" src="./.github/diagrama-de-classe.png">
-</p>
-
-### Modelo Físico
-
-<p align="center">
-  <img alt="Modelo Físico" title="#ModeloFisico" src="./.github/modelo-fisico.png">
-</p>
-
----
-
 ## 🎨 Layout
 
 O layout da aplicação está disponível no Figma:
@@ -78,12 +62,6 @@ O layout da aplicação está disponível no Figma:
 <p align="center">
   <img alt="Figma" title="#Figma" src="./.github/figma.png" width="1200px">
 </p>
-
----
-
-## 🚀 Como executar o projeto
-### Pré-requisitos
-
 
 ---
 
