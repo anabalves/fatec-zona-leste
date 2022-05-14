@@ -315,7 +315,7 @@ IN (SELECT
 			FROM 
 				TB_PROF_TURMA 
 			WHERE 
-				ANO_SEM = 20021);
+				ANO_SEM = 20191);
 
 /* 28) Obter os identificadores das salas (código do prédio e número da sala) que, em 2002/1: nas segundas-feiras (dia da semana = 2), tiveram ao menos uma turma do departamento 'Informática' */
 SELECT DISTINCT
