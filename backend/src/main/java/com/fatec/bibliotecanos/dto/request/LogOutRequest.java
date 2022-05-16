@@ -1,4 +1,4 @@
-package com.fatec.bibliotecanos.security.payload.request;
+package com.fatec.bibliotecanos.dto.request;
 
 public class LogOutRequest {
 

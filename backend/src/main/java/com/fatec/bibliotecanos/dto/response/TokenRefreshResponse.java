@@ -1,4 +1,4 @@
-package com.fatec.bibliotecanos.security.payload.response;
+package com.fatec.bibliotecanos.dto.response;
 
 public class TokenRefreshResponse {
 
