@@ -1,22 +1,19 @@
 package com.fatec.bibliotecanos.resources.exceptions;
 
+import java.time.Instant;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-import java.time.Instant;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class StandardError implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class ErrorMessage {
 
+    private int statusCode;
     private Instant timestamp;
-    private Integer status;
-    private String error;
     private String message;
-    private String path;
+    private String description;
 
 }

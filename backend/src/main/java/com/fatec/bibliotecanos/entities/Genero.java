@@ -1,6 +1,5 @@
 package com.fatec.bibliotecanos.entities;
 
-import com.fatec.bibliotecanos.entities.enums.ERole;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -8,25 +7,26 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-@Table(name = "tb_role")
-public class Role implements Serializable {
+@Table(name = "tb_genero")
+public class Genero implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private ERole autorizacao;
+    @Column(unique = true)
+    private String nome;
 
-    public Role(ERole autorizacao) {
-        this.autorizacao = autorizacao;
-    }
+    @OneToMany(mappedBy = "genero")
+    private List<Livro> livro = new ArrayList<>();
 
 }

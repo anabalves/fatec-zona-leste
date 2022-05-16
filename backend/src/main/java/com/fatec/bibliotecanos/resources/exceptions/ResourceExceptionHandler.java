@@ -1,4 +1,5 @@
 package com.fatec.bibliotecanos.resources.exceptions;
+
 import java.time.Instant;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +22,7 @@ public class ResourceExceptionHandler {
         StandardError err = new StandardError();
         err.setTimestamp(Instant.now());
         err.setStatus(status.value());
-        err.setError("Resource not found");
+        err.setError("Recurso não encontrado");
         err.setMessage(e.getMessage());
         err.setPath(request.getRequestURI());
         return ResponseEntity.status(status).body(err);
@@ -33,7 +34,7 @@ public class ResourceExceptionHandler {
         StandardError err = new StandardError();
         err.setTimestamp(Instant.now());
         err.setStatus(status.value());
-        err.setError("Database exception");
+        err.setError("Exceção de base de dados");
         err.setMessage(e.getMessage());
         err.setPath(request.getRequestURI());
         return ResponseEntity.status(status).body(err);
@@ -45,7 +46,7 @@ public class ResourceExceptionHandler {
         ValidationError err = new ValidationError();
         err.setTimestamp(Instant.now());
         err.setStatus(status.value());
-        err.setError("Validation exception");
+        err.setError("Exceção de validação");
         err.setMessage(e.getMessage());
         err.setPath(request.getRequestURI());
 
@@ -55,5 +56,5 @@ public class ResourceExceptionHandler {
 
         return ResponseEntity.status(status).body(err);
     }
-}
 
+}
