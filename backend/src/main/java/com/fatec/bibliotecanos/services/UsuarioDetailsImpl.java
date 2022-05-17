@@ -26,9 +26,9 @@ public class UsuarioDetailsImpl implements Serializable, UserDetails {
     private String nome;
     private String sobrenome;
     private String telefone;
-    private String emailAlternativo;
-    private String email;
     private String cpf;
+    private String email;
+    private String emailAlternativo;
     private String cep;
     private String endereco;
     private String numeroEndereco;
@@ -41,14 +41,14 @@ public class UsuarioDetailsImpl implements Serializable, UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UsuarioDetailsImpl(Long id, String nome, String sobrenome, String telefone, String emailAlternativo, String email, String cpf, String cep, String endereco, String numeroEndereco, String complemento, String cidade, String estado, String senha, Collection<? extends GrantedAuthority> authorities) {
+    public UsuarioDetailsImpl(Long id, String nome, String sobrenome, String cpf, String telefone, String email, String emailAlternativo, String cep, String endereco, String numeroEndereco, String complemento, String cidade, String estado, String senha, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
-        this.telefone = telefone;
-        this.emailAlternativo = emailAlternativo;
-        this.email = email;
         this.cpf = cpf;
+        this.telefone = telefone;
+        this.email = email;
+        this.emailAlternativo = emailAlternativo;
         this.cep = cep;
         this.endereco = endereco;
         this.numeroEndereco = numeroEndereco;
@@ -68,9 +68,9 @@ public class UsuarioDetailsImpl implements Serializable, UserDetails {
             usuario.getId(),
             usuario.getNome(),
             usuario.getSobrenome(),
-            usuario.getEmail(),
-            usuario.getTelefone(),
             usuario.getCpf(),
+            usuario.getTelefone(),
+            usuario.getEmail(),
             usuario.getEmailAlternativo(),
             usuario.getCep(),
             usuario.getEndereco(),
@@ -102,7 +102,7 @@ public class UsuarioDetailsImpl implements Serializable, UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return getEmail();
     }
 
     @Override

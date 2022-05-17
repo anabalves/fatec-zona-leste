@@ -1,5 +1,6 @@
 package com.fatec.bibliotecanos.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fatec.bibliotecanos.entities.Livro;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +8,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.time.Instant;
 
@@ -27,14 +27,9 @@ public class LivroDTO implements Serializable {
     private Integer edicao;
     private String isbn;
     private Integer quantidade;
-    private Boolean status;
     private String imgUrl;
     private Instant anoPublicacao;
-
-    @NotEmpty(message = "Livro sem genero não é permitido")
     private Long generoId;
-
-    @NotEmpty(message = "Livro sem editora não é permitido")
     private Long editoraId;
 
     public LivroDTO(Livro entity) {
@@ -45,7 +40,6 @@ public class LivroDTO implements Serializable {
         this.edicao = entity.getEdicao();
         this.isbn = entity.getIsbn();
         this.quantidade = entity.getQuantidade();
-        this.status = entity.getStatus();
         this.imgUrl = entity.getImgUrl();
         this.anoPublicacao = entity.getAnoPublicacao();
         this.generoId = entity.getGenero().getId();

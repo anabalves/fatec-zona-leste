@@ -1,5 +1,6 @@
 package com.fatec.bibliotecanos.entities;
 
+import com.fatec.bibliotecanos.entities.enums.ELivro;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -28,10 +29,12 @@ public class Livro implements Serializable {
     private Integer edicao;
     private String isbn;
     private Integer quantidade;
-    private Boolean status;
     private String imgUrl;
     private Instant anoPublicacao;
 
+    @Enumerated(EnumType.STRING)
+    private ELivro status;
+    
     @ManyToOne
     @JoinColumn(name = "genero_id")
     private Genero genero;

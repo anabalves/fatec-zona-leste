@@ -28,6 +28,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -71,7 +72,7 @@ public class AuthResource {
 
         String jwt = jwtUtils.generateJwtToken(usuarioDetails);
 
-        List<String> roles = usuarioDetails.getAuthorities().stream().map(item -> item.getAuthority())
+        List<String> roles = usuarioDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
 
         RefreshToken refreshToken = refreshTokenService.createRefreshToken(usuarioDetails.getId());
@@ -98,11 +99,11 @@ public class AuthResource {
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         if (usuarioRepository.existsByEmail(signUpRequest.getEmail())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already taken!"));
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: O e-mail já foi cadastrado!"));
         }
 
         if (usuarioRepository.existsByCpf(signUpRequest.getCpf())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: CPF is already in use!"));
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: O CPF já foi cadastrado!"));
         }
 
         // Create new usuario's account
@@ -126,24 +127,24 @@ public class AuthResource {
 
         if (strRoles == null) {
             Role usuarioRole = roleRepository.findByAutorizacao(ERole.ROLE_USUARIO)
-                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                    .orElseThrow(() -> new RuntimeException("Error: Role não encontrada."));
             roles.add(usuarioRole);
         } else {
             strRoles.forEach(role -> {
                 switch (role) {
                     case "admin":
                         Role adminRole = roleRepository.findByAutorizacao(ERole.ROLE_ADMIN)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                                .orElseThrow(() -> new RuntimeException("Error: Role não encontrada."));
                         roles.add(adminRole);
                         break;
                     case "bibliotecario":
                         Role bibliotecarioRole = roleRepository.findByAutorizacao(ERole.ROLE_BIBLIOTECARIO)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                                .orElseThrow(() -> new RuntimeException("Error: Role não encontrada."));
                         roles.add(bibliotecarioRole);
                         break;
                     default:
                         Role usuarioRole = roleRepository.findByAutorizacao(ERole.ROLE_USUARIO)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                                .orElseThrow(() -> new RuntimeException("Error: Role não encontrada."));
                         roles.add(usuarioRole);
                 }
             });
@@ -152,7 +153,7 @@ public class AuthResource {
         usuario.setRoles(roles);
         usuarioRepository.save(usuario);
 
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+        return ResponseEntity.ok(new MessageResponse("Usuário cadastrado com sucesso!"));
     }
 
     @PostMapping("/refreshtoken")
@@ -167,13 +168,13 @@ public class AuthResource {
                     return ResponseEntity.ok(new TokenRefreshResponse(token, requestRefreshToken));
                 })
                 .orElseThrow(() -> new TokenRefreshException(requestRefreshToken,
-                        "Refresh token is not in database!"));
+                        "Refresh token não está na base de dados!"));
     }
 
     @PostMapping("/logout")
     public ResponseEntity<?> logoutUser(@Valid @RequestBody LogOutRequest logOutRequest) {
         refreshTokenService.deleteByUserId(logOutRequest.getUsuarioId());
-        return ResponseEntity.ok(new MessageResponse("Log out successful!"));
+        return ResponseEntity.ok(new MessageResponse("Log out com sucesso!"));
     }
 
 }

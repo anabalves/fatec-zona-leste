@@ -1,9 +1,14 @@
 package com.fatec.bibliotecanos.services;
 
 import com.fatec.bibliotecanos.dto.EmprestimoDevolucaoDTO;
-import com.fatec.bibliotecanos.entities.EmprestimoDevolucao;
+import com.fatec.bibliotecanos.entities.*;
+import com.fatec.bibliotecanos.entities.enums.EEmprestimoDevolucao;
+import com.fatec.bibliotecanos.entities.enums.ELivro;
 import com.fatec.bibliotecanos.repositories.EmprestimoDevolucaoRepository;
+import com.fatec.bibliotecanos.repositories.LivroRepository;
+import com.fatec.bibliotecanos.repositories.UsuarioRepository;
 import com.fatec.bibliotecanos.services.exceptions.DatabaseException;
+import com.fatec.bibliotecanos.services.exceptions.EmprestimoDevolucaoException;
 import com.fatec.bibliotecanos.services.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +21,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 
 @Service
@@ -27,11 +34,11 @@ public class EmprestimoDevolucaoService implements IEmprestimoDevolucaoService {
     @Autowired
     private EmprestimoDevolucaoRepository emprestimoDevolucaoRepository;
 
-    @Override
-    public Page<EmprestimoDevolucaoDTO> findAllPaged(Pageable pageable) {
-        Page<EmprestimoDevolucao> list = emprestimoDevolucaoRepository.findAll(pageable);
-        return list.map(x -> new EmprestimoDevolucaoDTO(x));
-    }
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private LivroRepository livroRepository;
 
     @Override
     public EmprestimoDevolucaoDTO findById(Long id) {
@@ -41,18 +48,34 @@ public class EmprestimoDevolucaoService implements IEmprestimoDevolucaoService {
     }
 
     @Override
-    public EmprestimoDevolucaoDTO insert(EmprestimoDevolucaoDTO dto) {
+    public EmprestimoDevolucaoDTO realizarEmprestimo(EmprestimoDevolucaoDTO dto) {
         EmprestimoDevolucao entity = new EmprestimoDevolucao();
-        copyDtoToEntity(dto, entity);
-        entity = emprestimoDevolucaoRepository.save(entity);
-        return new EmprestimoDevolucaoDTO(entity);
+        Livro livro = livroRepository.getById(dto.getId());
+        if (livro.getStatus().equals(ELivro.INDISPONIVEL)) {
+            throw new EmprestimoDevolucaoException("Livro Indisponivel");
+        } else {
+            copyDtoToEntity(dto, entity);
+            entity.setDataEmprestimo(Instant.now());
+            entity.setSituacao(EEmprestimoDevolucao.EM_DIA);
+            Instant instant = entity.getDataEmprestimo();
+            entity.setDataDevolucao(instant.plus(30, ChronoUnit.DAYS));
+
+            entity = emprestimoDevolucaoRepository.save(entity);
+
+            livro.setQuantidade(livro.getQuantidade() - 1);
+
+            return new EmprestimoDevolucaoDTO(entity);
+        }
     }
 
     @Override
-    public EmprestimoDevolucaoDTO update(Long id, EmprestimoDevolucaoDTO dto) {
+    public EmprestimoDevolucaoDTO realizarDevolucao(Long id, EmprestimoDevolucaoDTO dto) {
         try {
             EmprestimoDevolucao entity = emprestimoDevolucaoRepository.getById(id);
             copyDtoToEntity(dto, entity);
+            entity.setDataEmprestimo(entity.getDataEmprestimo());
+            entity.setDataDevolucao(Instant.now());
+            entity.setSituacao(EEmprestimoDevolucao.DEVOLVIDO);
             entity = emprestimoDevolucaoRepository.save(entity);
             return new EmprestimoDevolucaoDTO(entity);
         }
@@ -62,7 +85,7 @@ public class EmprestimoDevolucaoService implements IEmprestimoDevolucaoService {
     }
 
     @Override
-    public void delete(Long id) {
+    public void deleteEmprestimo(Long id) {
         try {
             emprestimoDevolucaoRepository.deleteById(id);
         }
@@ -74,10 +97,36 @@ public class EmprestimoDevolucaoService implements IEmprestimoDevolucaoService {
         }
     }
 
+    @Override
+    public Page<EmprestimoDevolucaoDTO> relatorioUsuarios(Pageable pageable) {
+        Page<EmprestimoDevolucao> list = emprestimoDevolucaoRepository.findAll(pageable);
+        return list.map(x -> new EmprestimoDevolucaoDTO(x));
+    }
+
+    @Override
+    public Page<EmprestimoDevolucaoDTO> relatorioSaida(Pageable pageable) {
+        Page<EmprestimoDevolucao> list = emprestimoDevolucaoRepository.findAll(pageable);
+        return list.map(x -> new EmprestimoDevolucaoDTO(x));
+    }
+
+    @Override
+    public Page<EmprestimoDevolucaoDTO> relatorioAtrasos(Pageable pageable) {
+        Page<EmprestimoDevolucao> list = emprestimoDevolucaoRepository.findAll(pageable);
+        return list.map(x -> new EmprestimoDevolucaoDTO(x));
+    }
+
+    @Override
+    public Page<EmprestimoDevolucaoDTO> findAll(Pageable pageable) {
+        Page<EmprestimoDevolucao> list = emprestimoDevolucaoRepository.findAll(pageable);
+        return list.map(x -> new EmprestimoDevolucaoDTO(x));
+    }
+
     private void copyDtoToEntity(EmprestimoDevolucaoDTO dto, EmprestimoDevolucao entity) {
-        entity.setSituacao(dto.getSituacao());
-        entity.setDataEmprestimo(dto.getDataEmprestimo());
-        entity.setDataDevoliucao(dto.getDataDevoliucao());
+        Usuario usuario = usuarioRepository.getById(dto.getId());
+        entity.setUsuario(usuario);
+
+        Livro livro = livroRepository.getById(dto.getId());
+        entity.setLivro(livro);
     }
 
 }

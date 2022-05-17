@@ -26,9 +26,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
         prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Value("${spring.h2.console.path}")
-    private String h2ConsolePath;
-
     @Autowired
     UsuarioDetailsServiceImpl usuarioDetailsService;
 
@@ -61,12 +58,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests()
-                .antMatchers("/api/auth/**").permitAll()
-                .antMatchers("/api/test/**").permitAll()
-                .antMatchers(h2ConsolePath + "/**").permitAll()
+                .authorizeRequests().antMatchers("/api/auth/**", "/h2-console/**").permitAll()
+                .antMatchers("/api/usuarios/**", "/api/livros/**", "/api/generos/**", "/api/editoras/**", "/api/emprestimos-devolucoes/**").permitAll()
                 .anyRequest().authenticated();
-
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         http.headers().frameOptions().disable();
     }
