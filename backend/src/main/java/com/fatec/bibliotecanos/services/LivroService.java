@@ -2,8 +2,10 @@ package com.fatec.bibliotecanos.services;
 
 import com.fatec.bibliotecanos.dto.LivroDTO;
 import com.fatec.bibliotecanos.entities.Editora;
+import com.fatec.bibliotecanos.entities.EmprestimoDevolucao;
 import com.fatec.bibliotecanos.entities.Genero;
 import com.fatec.bibliotecanos.entities.Livro;
+import com.fatec.bibliotecanos.entities.enums.ELivro;
 import com.fatec.bibliotecanos.repositories.EditoraRepository;
 import com.fatec.bibliotecanos.repositories.GeneroRepository;
 import com.fatec.bibliotecanos.repositories.LivroRepository;
@@ -38,7 +40,7 @@ public class LivroService implements ILivroService {
     private EditoraRepository editoraRepository;
 
     @Override
-    public Page<LivroDTO> findAllPaged(Pageable pageable) {
+    public Page<LivroDTO> findAll(Pageable pageable) {
         Page<Livro> list = livroRepository.findAll(pageable);
         return list.map(x -> new LivroDTO(x));
     }
@@ -53,7 +55,12 @@ public class LivroService implements ILivroService {
     @Override
     public LivroDTO insert(LivroDTO dto) {
         Livro entity = new Livro();
+
+        if (dto.getQuantidade().equals(0))
+            entity.setStatus(ELivro.INDISPONIVEL);
+
         copyDtoToEntity(dto, entity);
+        entity.setStatus(ELivro.DISPONIVEL);
         entity = livroRepository.save(entity);
         return new LivroDTO(entity);
     }
@@ -62,7 +69,12 @@ public class LivroService implements ILivroService {
     public LivroDTO update(Long id, LivroDTO dto) {
         try {
             Livro entity = livroRepository.getById(id);
+
+            if (dto.getQuantidade().equals(0))
+                entity.setStatus(ELivro.INDISPONIVEL);
+
             copyDtoToEntity(dto, entity);
+            entity.setStatus(ELivro.DISPONIVEL);
             entity = livroRepository.save(entity);
             return new LivroDTO(entity);
         }
@@ -91,14 +103,13 @@ public class LivroService implements ILivroService {
         entity.setEdicao(dto.getEdicao());
         entity.setIsbn(dto.getIsbn());
         entity.setQuantidade(dto.getQuantidade());
-        entity.setStatus(dto.getStatus());
         entity.setImgUrl(dto.getImgUrl());
         entity.setAnoPublicacao(dto.getAnoPublicacao());
 
-        Genero genero = generoRepository.getById(dto.getId());
+        Genero genero = generoRepository.getOne(dto.getId());
         entity.setGenero(genero);
 
-        Editora editora = editoraRepository.getById(dto.getId());
+        Editora editora = editoraRepository.getOne(dto.getId());
         entity.setEditora(editora);
     }
 

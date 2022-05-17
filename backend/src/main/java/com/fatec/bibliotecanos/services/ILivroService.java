@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface ILivroService {
 
-    Page<LivroDTO> findAllPaged(Pageable pageable);
+    Page<LivroDTO> findAll(Pageable pageable);
     LivroDTO findById(Long id);
     LivroDTO insert(LivroDTO dto);
     LivroDTO update(Long id, LivroDTO dto);

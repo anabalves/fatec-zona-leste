@@ -10,10 +10,10 @@ public class JwtResponse {
     private Long id;
     private String nome;
     private String sobrenome;
-    private String email;
-    private String emailAlternativo;
     private String cpf;
     private String telefone;
+    private String email;
+    private String emailAlternativo;
     private String cep;
     private String endereco;
     private String numeroEndereco;
@@ -28,10 +28,10 @@ public class JwtResponse {
         this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
-        this.email = email;
-        this.emailAlternativo = emailAlternativo;
         this.cpf = cpf;
         this.telefone = telefone;
+        this.email = email;
+        this.emailAlternativo = emailAlternativo;
         this.cep = cep;
         this.endereco = endereco;
         this.numeroEndereco = numeroEndereco;

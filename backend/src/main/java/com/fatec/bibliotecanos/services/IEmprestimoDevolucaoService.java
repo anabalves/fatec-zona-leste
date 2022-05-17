@@ -6,10 +6,13 @@ import org.springframework.data.domain.Pageable;
 
 public interface IEmprestimoDevolucaoService {
 
-    Page<EmprestimoDevolucaoDTO> findAllPaged(Pageable pageable);
+    Page<EmprestimoDevolucaoDTO> relatorioUsuarios(Pageable pageable);
+    Page<EmprestimoDevolucaoDTO> relatorioSaida(Pageable pageable);
+    Page<EmprestimoDevolucaoDTO> relatorioAtrasos(Pageable pageable);
+    Page<EmprestimoDevolucaoDTO> findAll(Pageable pageable);
     EmprestimoDevolucaoDTO findById(Long id);
-    EmprestimoDevolucaoDTO insert(EmprestimoDevolucaoDTO dto);
-    EmprestimoDevolucaoDTO update(Long id, EmprestimoDevolucaoDTO dto);
-    void delete(Long id);
+    EmprestimoDevolucaoDTO realizarEmprestimo(EmprestimoDevolucaoDTO dto);
+    EmprestimoDevolucaoDTO realizarDevolucao(Long id, EmprestimoDevolucaoDTO dto);
+    void deleteEmprestimo(Long id);
 
 }

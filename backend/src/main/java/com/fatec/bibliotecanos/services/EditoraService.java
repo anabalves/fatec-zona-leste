@@ -51,7 +51,7 @@ public class EditoraService implements IEditoraService {
     @Override
     public EditoraDTO update(Long id, EditoraDTO dto) {
         try {
-            Editora entity = editoraRepository.getById(id);
+            Editora entity = editoraRepository.getOne(id);
             copyDtoToEntity(dto, entity);
             entity = editoraRepository.save(entity);
             return new EditoraDTO(entity);

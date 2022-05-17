@@ -1,5 +1,6 @@
 package com.fatec.bibliotecanos.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fatec.bibliotecanos.entities.EmprestimoDevolucao;
 import com.fatec.bibliotecanos.entities.enums.EEmprestimoDevolucao;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.time.Instant;
 
@@ -20,17 +22,24 @@ public class EmprestimoDevolucaoDTO implements Serializable {
 
     private Long id;
 
-    private EEmprestimoDevolucao situacao;
+    @NotEmpty(message = "Emprestimo sem usuario não é permitido")
+    private Long usuarioId;
 
-    @NotBlank(message = "Campo obrigatório")
+    @NotEmpty(message = "Emprestimo sem livro não é permitido")
+    private Long livroId;
+
+    @JsonIgnore
+    private String situacao;
+    private Instant dataDevolucao;
     private Instant dataEmprestimo;
-    private Instant dataDevoliucao;
 
     public EmprestimoDevolucaoDTO(EmprestimoDevolucao entity) {
         this.id = entity.getId();
-        this.situacao = entity.getSituacao();
+        this.usuarioId = entity.getUsuario().getId();
+        this.livroId = entity.getLivro().getId();
+        this.situacao = entity.getSituacao().name();
+        this.dataDevolucao = entity.getDataDevolucao();
         this.dataEmprestimo = entity.getDataEmprestimo();
-        this.dataDevoliucao = entity.getDataDevoliucao();
     }
 
 }

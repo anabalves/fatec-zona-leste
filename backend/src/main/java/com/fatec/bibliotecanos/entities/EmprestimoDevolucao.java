@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -28,6 +30,14 @@ public class EmprestimoDevolucao implements Serializable {
 
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant dataEmprestimo;
-    private Instant dataDevoliucao;
+    private Instant dataDevolucao;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "livro_id")
+    private Livro livro;
 
 }
