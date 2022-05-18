@@ -18,7 +18,7 @@ import { HomeComponent } from './components/home/home.component';
     AppComponent,
     SigninComponent,
     RegisterComponent,
-    LandingComponent
+    LandingComponent,
     RegisterComponent,
     HomeComponent
   ],
