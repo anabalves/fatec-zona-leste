@@ -27,6 +27,6 @@ public class Editora implements Serializable {
     private String nome;
 
     @OneToMany(mappedBy = "editora")
-    private List<Livro> livro = new ArrayList<>();
+    private List<Livro> livros = new ArrayList<>();
 
 }

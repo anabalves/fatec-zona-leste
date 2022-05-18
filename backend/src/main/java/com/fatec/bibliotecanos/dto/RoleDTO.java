@@ -1,29 +1,27 @@
 package com.fatec.bibliotecanos.dto;
 
-import com.fatec.bibliotecanos.entities.Genero;
+import com.fatec.bibliotecanos.entities.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class GeneroDTO implements Serializable {
+public class RoleDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id;
+    private String autorizacao;
 
-    @NotBlank(message = "Campo obrigatório")
-    private String nome;
-
-    public GeneroDTO(Genero entity) {
-        id = entity.getId();
-        nome = entity.getNome();
+    public RoleDTO(Role role) {
+        super();
+        id = role.getId();
+        autorizacao = role.getAutorizacao().name();
     }
 
 }
