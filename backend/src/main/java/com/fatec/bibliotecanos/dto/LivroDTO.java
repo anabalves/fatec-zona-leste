@@ -1,6 +1,5 @@
 package com.fatec.bibliotecanos.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fatec.bibliotecanos.entities.Livro;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,17 +32,17 @@ public class LivroDTO implements Serializable {
     private Long editoraId;
 
     public LivroDTO(Livro entity) {
-        this.id = entity.getId();
-        this.titulo = entity.getTitulo();
-        this.descricao = entity.getDescricao();
-        this.autor = entity.getAutor();
-        this.edicao = entity.getEdicao();
-        this.isbn = entity.getIsbn();
-        this.quantidade = entity.getQuantidade();
-        this.imgUrl = entity.getImgUrl();
-        this.anoPublicacao = entity.getAnoPublicacao();
-        this.generoId = entity.getGenero().getId();
-        this.editoraId = entity.getEditora().getId();
+        id = entity.getId();
+        titulo = entity.getTitulo();
+        descricao = entity.getDescricao();
+        autor = entity.getAutor();
+        edicao = entity.getEdicao();
+        isbn = entity.getIsbn();
+        quantidade = entity.getQuantidade();
+        imgUrl = entity.getImgUrl();
+        anoPublicacao = entity.getAnoPublicacao();
+        generoId = entity.getGenero().getId();
+        editoraId = entity.getEditora().getId();
     }
 
 }

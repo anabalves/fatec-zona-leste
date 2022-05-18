@@ -55,31 +55,31 @@ public class LivroService implements ILivroService {
     @Override
     public LivroDTO insert(LivroDTO dto) {
         Livro entity = new Livro();
-
-        if (dto.getQuantidade().equals(0))
-            entity.setStatus(ELivro.INDISPONIVEL);
-
-        copyDtoToEntity(dto, entity);
-        entity.setStatus(ELivro.DISPONIVEL);
-        entity = livroRepository.save(entity);
-        return new LivroDTO(entity);
+        return verificaStatusLivro(dto, entity);
     }
 
     @Override
     public LivroDTO update(Long id, LivroDTO dto) {
         try {
-            Livro entity = livroRepository.getById(id);
+            Livro entity = livroRepository.getOne(id);
+            return verificaStatusLivro(dto, entity);
+        }
+        catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException("Id não encontrado " + id);
+        }
+    }
 
-            if (dto.getQuantidade().equals(0))
-                entity.setStatus(ELivro.INDISPONIVEL);
-
+    private LivroDTO verificaStatusLivro(LivroDTO dto, Livro entity) {
+        if (dto.getQuantidade().equals(0)) {
+            entity.setStatus(ELivro.INDISPONIVEL);
+            copyDtoToEntity(dto, entity);
+            entity = livroRepository.save(entity);
+            return new LivroDTO(entity);
+        } else {
             copyDtoToEntity(dto, entity);
             entity.setStatus(ELivro.DISPONIVEL);
             entity = livroRepository.save(entity);
             return new LivroDTO(entity);
-        }
-        catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundException("Id não encontrado " + id);
         }
     }
 
@@ -106,10 +106,10 @@ public class LivroService implements ILivroService {
         entity.setImgUrl(dto.getImgUrl());
         entity.setAnoPublicacao(dto.getAnoPublicacao());
 
-        Genero genero = generoRepository.getOne(dto.getId());
+        Genero genero = generoRepository.getOne(dto.getGeneroId());
         entity.setGenero(genero);
 
-        Editora editora = editoraRepository.getOne(dto.getId());
+        Editora editora = editoraRepository.getOne(dto.getEditoraId());
         entity.setEditora(editora);
     }
 

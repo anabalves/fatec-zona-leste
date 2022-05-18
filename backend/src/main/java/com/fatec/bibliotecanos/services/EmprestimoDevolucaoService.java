@@ -50,7 +50,7 @@ public class EmprestimoDevolucaoService implements IEmprestimoDevolucaoService {
     @Override
     public EmprestimoDevolucaoDTO realizarEmprestimo(EmprestimoDevolucaoDTO dto) {
         EmprestimoDevolucao entity = new EmprestimoDevolucao();
-        Livro livro = livroRepository.getById(dto.getId());
+        Livro livro = livroRepository.getOne(dto.getLivroId());
         if (livro.getStatus().equals(ELivro.INDISPONIVEL)) {
             throw new EmprestimoDevolucaoException("Livro Indisponivel");
         } else {
@@ -71,11 +71,13 @@ public class EmprestimoDevolucaoService implements IEmprestimoDevolucaoService {
     @Override
     public EmprestimoDevolucaoDTO realizarDevolucao(Long id, EmprestimoDevolucaoDTO dto) {
         try {
-            EmprestimoDevolucao entity = emprestimoDevolucaoRepository.getById(id);
+            Livro livro = livroRepository.getOne(dto.getLivroId());
+            EmprestimoDevolucao entity = emprestimoDevolucaoRepository.getOne(id);
             copyDtoToEntity(dto, entity);
             entity.setDataEmprestimo(entity.getDataEmprestimo());
             entity.setDataDevolucao(Instant.now());
             entity.setSituacao(EEmprestimoDevolucao.DEVOLVIDO);
+            livro.setQuantidade(livro.getQuantidade() + 1);
             entity = emprestimoDevolucaoRepository.save(entity);
             return new EmprestimoDevolucaoDTO(entity);
         }
@@ -122,10 +124,10 @@ public class EmprestimoDevolucaoService implements IEmprestimoDevolucaoService {
     }
 
     private void copyDtoToEntity(EmprestimoDevolucaoDTO dto, EmprestimoDevolucao entity) {
-        Usuario usuario = usuarioRepository.getById(dto.getId());
+        Usuario usuario = usuarioRepository.getOne(dto.getUsuarioId());
         entity.setUsuario(usuario);
 
-        Livro livro = livroRepository.getById(dto.getId());
+        Livro livro = livroRepository.getOne(dto.getLivroId());
         entity.setLivro(livro);
     }
 

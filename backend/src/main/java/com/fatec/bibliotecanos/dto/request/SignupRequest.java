@@ -26,7 +26,7 @@ public class SignupRequest {
     @NotBlank
     private String senha;
 
-    private Set<String> role;
+    private Set<String> roles;
 
     public String getNome() {
         return nome;
@@ -124,12 +124,12 @@ public class SignupRequest {
         this.emailAlternativo = emailAlternativo;
     }
 
-    public Set<String> getRole() {
-        return this.role;
+    public Set<String> getRoles() {
+        return this.roles;
     }
 
-    public void setRole(Set<String> role) {
-        this.role = role;
+    public void setRoles(Set<String> roles) {
+        this.roles = roles;
     }
 
     public String getSenha() {

@@ -28,7 +28,6 @@ public class EmprestimoDevolucaoDTO implements Serializable {
     @NotEmpty(message = "Emprestimo sem livro não é permitido")
     private Long livroId;
 
-    @JsonIgnore
     private String situacao;
     private Instant dataDevolucao;
     private Instant dataEmprestimo;
