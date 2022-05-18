@@ -56,19 +56,19 @@ public class EmprestimoDevolucaoResource {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping(value = "/relatorioUsuarios")
+    @GetMapping(value = "/relatorio-usuarios")
     public ResponseEntity<Page<EmprestimoDevolucaoDTO>> relatorioUsuarios(Pageable pageable) {
         Page<EmprestimoDevolucaoDTO> list = emprestimoDevolucaoService.relatorioUsuarios(pageable);
         return ResponseEntity.ok().body(list);
     }
 
-    @GetMapping(value = "/relatorioSaida")
+    @GetMapping(value = "/relatorio-saida")
     public ResponseEntity<Page<EmprestimoDevolucaoDTO>> relatorioSaida(Pageable pageable) {
         Page<EmprestimoDevolucaoDTO> list = emprestimoDevolucaoService.relatorioSaida(pageable);
         return ResponseEntity.ok().body(list);
     }
 
-    @GetMapping(value = "/relatorioAtrasos")
+    @GetMapping(value = "/relatorio-atrasos")
     public ResponseEntity<Page<EmprestimoDevolucaoDTO>> relatorioAtrasos(Pageable pageable) {
         Page<EmprestimoDevolucaoDTO> list = emprestimoDevolucaoService.relatorioAtrasos(pageable);
         return ResponseEntity.ok().body(list);

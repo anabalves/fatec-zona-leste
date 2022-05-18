@@ -122,7 +122,7 @@ public class AuthResource {
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getSenha()));
 
-        Set<String> strRoles = signUpRequest.getRole();
+        Set<String> strRoles = signUpRequest.getRoles();
         Set<Role> roles = new HashSet<>();
 
         if (strRoles == null) {

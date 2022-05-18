@@ -27,6 +27,6 @@ public class Genero implements Serializable {
     private String nome;
 
     @OneToMany(mappedBy = "genero")
-    private List<Livro> livro = new ArrayList<>();
+    private List<Livro> livros = new ArrayList<>();
 
 }
