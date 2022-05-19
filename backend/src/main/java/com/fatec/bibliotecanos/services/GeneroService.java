@@ -5,8 +5,6 @@ import com.fatec.bibliotecanos.entities.Genero;
 import com.fatec.bibliotecanos.repositories.GeneroRepository;
 import com.fatec.bibliotecanos.services.exceptions.DatabaseException;
 import com.fatec.bibliotecanos.services.exceptions.ResourceNotFoundException;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -19,9 +17,7 @@ import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 @Transactional
-@Slf4j
 public class GeneroService implements IGeneroService {
 
     @Autowired
@@ -30,7 +26,7 @@ public class GeneroService implements IGeneroService {
     @Override
     public Page<GeneroDTO> findAllPaged(Pageable pageable) {
         Page<Genero> list = generoRepository.findAll(pageable);
-        return list.map(x -> new GeneroDTO(x));
+        return list.map(GeneroDTO::new);
     }
 
     @Override

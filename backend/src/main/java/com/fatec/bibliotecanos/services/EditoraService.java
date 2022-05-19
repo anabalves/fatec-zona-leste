@@ -5,8 +5,6 @@ import com.fatec.bibliotecanos.entities.Editora;
 import com.fatec.bibliotecanos.repositories.EditoraRepository;
 import com.fatec.bibliotecanos.services.exceptions.DatabaseException;
 import com.fatec.bibliotecanos.services.exceptions.ResourceNotFoundException;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -19,9 +17,7 @@ import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 @Transactional
-@Slf4j
 public class EditoraService implements IEditoraService {
 
     @Autowired
@@ -30,7 +26,7 @@ public class EditoraService implements IEditoraService {
     @Override
     public Page<EditoraDTO> findAllPaged(Pageable pageable) {
         Page<Editora> list = editoraRepository.findAll(pageable);
-        return list.map(x -> new EditoraDTO(x));
+        return list.map(EditoraDTO::new);
     }
 
     @Override

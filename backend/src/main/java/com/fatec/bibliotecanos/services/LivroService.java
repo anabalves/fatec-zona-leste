@@ -2,7 +2,6 @@ package com.fatec.bibliotecanos.services;
 
 import com.fatec.bibliotecanos.dto.LivroDTO;
 import com.fatec.bibliotecanos.entities.Editora;
-import com.fatec.bibliotecanos.entities.EmprestimoDevolucao;
 import com.fatec.bibliotecanos.entities.Genero;
 import com.fatec.bibliotecanos.entities.Livro;
 import com.fatec.bibliotecanos.entities.enums.ELivro;
@@ -11,8 +10,6 @@ import com.fatec.bibliotecanos.repositories.GeneroRepository;
 import com.fatec.bibliotecanos.repositories.LivroRepository;
 import com.fatec.bibliotecanos.services.exceptions.DatabaseException;
 import com.fatec.bibliotecanos.services.exceptions.ResourceNotFoundException;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -25,9 +22,7 @@ import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 @Transactional
-@Slf4j
 public class LivroService implements ILivroService {
 
     @Autowired
@@ -42,7 +37,7 @@ public class LivroService implements ILivroService {
     @Override
     public Page<LivroDTO> findAll(Pageable pageable) {
         Page<Livro> list = livroRepository.findAll(pageable);
-        return list.map(x -> new LivroDTO(x));
+        return list.map(LivroDTO::new);
     }
 
     @Override
@@ -73,14 +68,12 @@ public class LivroService implements ILivroService {
         if (dto.getQuantidade().equals(0)) {
             entity.setStatus(ELivro.INDISPONIVEL);
             copyDtoToEntity(dto, entity);
-            entity = livroRepository.save(entity);
-            return new LivroDTO(entity);
         } else {
             copyDtoToEntity(dto, entity);
             entity.setStatus(ELivro.DISPONIVEL);
-            entity = livroRepository.save(entity);
-            return new LivroDTO(entity);
         }
+        entity = livroRepository.save(entity);
+        return new LivroDTO(entity);
     }
 
     @Override

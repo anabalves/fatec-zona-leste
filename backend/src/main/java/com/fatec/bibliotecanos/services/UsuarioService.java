@@ -6,8 +6,6 @@ import com.fatec.bibliotecanos.repositories.RoleRepository;
 import com.fatec.bibliotecanos.repositories.UsuarioRepository;
 import com.fatec.bibliotecanos.services.exceptions.DatabaseException;
 import com.fatec.bibliotecanos.services.exceptions.ResourceNotFoundException;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -19,9 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 @Transactional
-@Slf4j
 public class UsuarioService implements IUsuarioService {
 
     @Autowired
