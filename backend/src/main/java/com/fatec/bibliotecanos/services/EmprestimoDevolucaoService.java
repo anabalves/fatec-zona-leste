@@ -10,8 +10,6 @@ import com.fatec.bibliotecanos.repositories.UsuarioRepository;
 import com.fatec.bibliotecanos.services.exceptions.DatabaseException;
 import com.fatec.bibliotecanos.services.exceptions.EmprestimoDevolucaoException;
 import com.fatec.bibliotecanos.services.exceptions.ResourceNotFoundException;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -26,9 +24,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 @Transactional
-@Slf4j
 public class EmprestimoDevolucaoService implements IEmprestimoDevolucaoService {
 
     @Autowired
@@ -102,25 +98,25 @@ public class EmprestimoDevolucaoService implements IEmprestimoDevolucaoService {
     @Override
     public Page<EmprestimoDevolucaoDTO> relatorioUsuarios(Pageable pageable) {
         Page<EmprestimoDevolucao> list = emprestimoDevolucaoRepository.findAll(pageable);
-        return list.map(x -> new EmprestimoDevolucaoDTO(x));
+        return list.map(EmprestimoDevolucaoDTO::new);
     }
 
     @Override
     public Page<EmprestimoDevolucaoDTO> relatorioSaida(Pageable pageable) {
         Page<EmprestimoDevolucao> list = emprestimoDevolucaoRepository.findAll(pageable);
-        return list.map(x -> new EmprestimoDevolucaoDTO(x));
+        return list.map(EmprestimoDevolucaoDTO::new);
     }
 
     @Override
     public Page<EmprestimoDevolucaoDTO> relatorioAtrasos(Pageable pageable) {
         Page<EmprestimoDevolucao> list = emprestimoDevolucaoRepository.findAll(pageable);
-        return list.map(x -> new EmprestimoDevolucaoDTO(x));
+        return list.map(EmprestimoDevolucaoDTO::new);
     }
 
     @Override
     public Page<EmprestimoDevolucaoDTO> findAll(Pageable pageable) {
         Page<EmprestimoDevolucao> list = emprestimoDevolucaoRepository.findAll(pageable);
-        return list.map(x -> new EmprestimoDevolucaoDTO(x));
+        return list.map(EmprestimoDevolucaoDTO::new);
     }
 
     private void copyDtoToEntity(EmprestimoDevolucaoDTO dto, EmprestimoDevolucao entity) {

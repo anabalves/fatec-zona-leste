@@ -4,8 +4,6 @@ import com.fatec.bibliotecanos.entities.RefreshToken;
 import com.fatec.bibliotecanos.repositories.RefreshTokenRepository;
 import com.fatec.bibliotecanos.repositories.UsuarioRepository;
 import com.fatec.bibliotecanos.resources.exceptions.TokenRefreshException;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import java.time.Instant;
 import java.util.Optional;
 import java.util.UUID;
@@ -16,9 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@RequiredArgsConstructor
 @Transactional
-@Slf4j
 public class RefreshTokenService {
     @Value("${bibliotecanos.app.jwtRefreshExpirationMs}")
     private Long refreshTokenDurationMs;
