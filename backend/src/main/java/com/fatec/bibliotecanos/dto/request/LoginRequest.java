@@ -1,7 +1,16 @@
 package com.fatec.bibliotecanos.dto.request;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
 import javax.validation.constraints.NotBlank;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
 public class LoginRequest {
 
     @NotBlank
@@ -9,21 +18,5 @@ public class LoginRequest {
 
     @NotBlank
     private String senha;
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
 
 }

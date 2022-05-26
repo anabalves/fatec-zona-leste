@@ -2,6 +2,9 @@ package com.fatec.bibliotecanos.services;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fatec.bibliotecanos.entities.Usuario;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,6 +15,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class UsuarioDetailsImpl implements Serializable, UserDetails {
     private static final long serialVersionUID = 1L;
 
@@ -35,23 +41,8 @@ public class UsuarioDetailsImpl implements Serializable, UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UsuarioDetailsImpl(Long id, String nome, String sobrenome, String cpf, String telefone, String email, String emailAlternativo, String cep, String endereco, String numeroEndereco, String complemento, String cidade, String estado, String senha, Collection<? extends GrantedAuthority> authorities) {
-        this.id = id;
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.cpf = cpf;
-        this.telefone = telefone;
-        this.email = email;
-        this.emailAlternativo = emailAlternativo;
-        this.cep = cep;
-        this.endereco = endereco;
-        this.numeroEndereco = numeroEndereco;
-        this.complemento = complemento;
-        this.cidade = cidade;
-        this.estado = estado;
-        this.senha = senha;
-        this.authorities = authorities;
-    }
+    private String situacao;
+    private String observacao;
 
     public static UsuarioDetailsImpl build(Usuario usuario) {
         List<GrantedAuthority> authorities = usuario.getRoles().stream()
@@ -73,128 +64,14 @@ public class UsuarioDetailsImpl implements Serializable, UserDetails {
             usuario.getCidade(),
             usuario.getEstado(),
             usuario.getSenha(),
-            authorities);
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getSobrenome() {
-        return sobrenome;
-    }
-
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getEmailAlternativo() {
-        return emailAlternativo;
-    }
-
-    public void setEmailAlternativo(String emailAlternativo) {
-        this.emailAlternativo = emailAlternativo;
-    }
-
-    public String getCep() {
-        return cep;
-    }
-
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
-    public String getNumeroEndereco() {
-        return numeroEndereco;
-    }
-
-    public void setNumeroEndereco(String numeroEndereco) {
-        this.numeroEndereco = numeroEndereco;
-    }
-
-    public String getComplemento() {
-        return complemento;
-    }
-
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
-    }
-
-    public String getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
-        this.authorities = authorities;
+            authorities,
+            usuario.getSituacao().name(),
+            usuario.getObservacao());
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getEmail() {
-        return email;
     }
 
     @Override

@@ -15,12 +15,14 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -36,11 +38,19 @@ public class EmprestimoDevolucaoService implements IEmprestimoDevolucaoService {
     @Autowired
     private LivroRepository livroRepository;
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
     @Override
     public EmprestimoDevolucaoDTO findById(Long id) {
         Optional<EmprestimoDevolucao> obj = emprestimoDevolucaoRepository.findById(id);
         EmprestimoDevolucao entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entidade não encontrada"));
         return new EmprestimoDevolucaoDTO(entity);
+    }
+
+    @Override
+    public EmprestimoDevolucaoDTO realizarReserva(EmprestimoDevolucaoDTO dto) {
+        return null;
     }
 
     @Override
@@ -51,10 +61,10 @@ public class EmprestimoDevolucaoService implements IEmprestimoDevolucaoService {
             throw new EmprestimoDevolucaoException("Livro Indisponivel");
         } else {
             copyDtoToEntity(dto, entity);
-            entity.setDataEmprestimo(Instant.now());
+            entity.setDataEmprestimo(LocalDate.now());
             entity.setSituacao(EEmprestimoDevolucao.EM_DIA);
-            Instant instant = entity.getDataEmprestimo();
-            entity.setDataDevolucao(instant.plus(30, ChronoUnit.DAYS));
+            LocalDate localDate = entity.getDataEmprestimo();
+            entity.setDataDevolucao(localDate.plusDays(30));
 
             entity = emprestimoDevolucaoRepository.save(entity);
 
@@ -71,7 +81,7 @@ public class EmprestimoDevolucaoService implements IEmprestimoDevolucaoService {
             EmprestimoDevolucao entity = emprestimoDevolucaoRepository.getOne(id);
             copyDtoToEntity(dto, entity);
             entity.setDataEmprestimo(entity.getDataEmprestimo());
-            entity.setDataDevolucao(Instant.now());
+            entity.setDataDevolucao(LocalDate.now());
             entity.setSituacao(EEmprestimoDevolucao.DEVOLVIDO);
             livro.setQuantidade(livro.getQuantidade() + 1);
             entity = emprestimoDevolucaoRepository.save(entity);
@@ -117,6 +127,11 @@ public class EmprestimoDevolucaoService implements IEmprestimoDevolucaoService {
     public Page<EmprestimoDevolucaoDTO> findAll(Pageable pageable) {
         Page<EmprestimoDevolucao> list = emprestimoDevolucaoRepository.findAll(pageable);
         return list.map(EmprestimoDevolucaoDTO::new);
+    }
+
+    public List<EmprestimoDevolucaoDTO> findAllUsuarioIdComDevolucaoEmDoisDias() {
+        return jdbcTemplate.query("SELECT DISTINCT * FROM tb_emprestimo_devolucao WHERE data_devolucao = CURRENT_DATE + interval '2 day'",
+                BeanPropertyRowMapper.newInstance(EmprestimoDevolucaoDTO.class));
     }
 
     private void copyDtoToEntity(EmprestimoDevolucaoDTO dto, EmprestimoDevolucao entity) {
