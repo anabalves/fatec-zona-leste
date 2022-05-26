@@ -10,6 +10,7 @@ import com.fatec.bibliotecanos.entities.RefreshToken;
 import com.fatec.bibliotecanos.entities.Role;
 import com.fatec.bibliotecanos.entities.Usuario;
 import com.fatec.bibliotecanos.entities.enums.ERole;
+import com.fatec.bibliotecanos.entities.enums.EUsuario;
 import com.fatec.bibliotecanos.repositories.RoleRepository;
 import com.fatec.bibliotecanos.repositories.UsuarioRepository;
 import com.fatec.bibliotecanos.resources.exceptions.TokenRefreshException;
@@ -91,7 +92,9 @@ public class AuthResource {
                 usuarioDetails.getComplemento(),
                 usuarioDetails.getCidade(),
                 usuarioDetails.getEstado(),
-                roles));
+                roles,
+                usuarioDetails.getSituacao(),
+                usuarioDetails.getObservacao()));
     }
 
     @PostMapping("/signup")
@@ -149,6 +152,8 @@ public class AuthResource {
         }
 
         usuario.setRoles(roles);
+        usuario.setSituacao(EUsuario.OK);
+        usuario.setObservacao("Usuário OK - Devoluções no Prazo Correto");
         usuarioRepository.save(usuario);
 
         return ResponseEntity.ok(new MessageResponse("Usuário cadastrado com sucesso!"));

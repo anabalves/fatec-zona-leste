@@ -1,5 +1,10 @@
 package com.fatec.bibliotecanos.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -7,6 +12,10 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
 @Table(name = "tb_editora")
 public class Editora implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -20,50 +29,5 @@ public class Editora implements Serializable {
 
     @OneToMany(mappedBy = "editora")
     private List<Livro> livros = new ArrayList<>();
-
-    public Editora() {}
-
-    public Editora(Long id, String nome, List<Livro> livros) {
-        this.id = id;
-        this.nome = nome;
-        this.livros = livros;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public List<Livro> getLivros() {
-        return livros;
-    }
-
-    public void setLivros(List<Livro> livros) {
-        this.livros = livros;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Editora)) return false;
-        Editora editora = (Editora) o;
-        return Objects.equals(getId(), editora.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId());
-    }
 
 }

@@ -1,7 +1,16 @@
 package com.fatec.bibliotecanos.dto.response;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
 public class JwtResponse {
 
     private String token;
@@ -21,8 +30,10 @@ public class JwtResponse {
     private String cidade;
     private String estado;
     private List<String> roles;
+    private String situacao;
+    private String observacao;
 
-    public JwtResponse(String accessToken, String refreshToken, Long id, String nome, String sobrenome, String email, String emailAlternativo, String cpf, String telefone, String cep, String endereco, String numeroEndereco, String complemento, String cidade, String estado, List<String> roles) {
+    public JwtResponse(String accessToken, String refreshToken, Long id, String nome, String sobrenome, String email, String emailAlternativo, String cpf, String telefone, String cep, String endereco, String numeroEndereco, String complemento, String cidade, String estado, List<String> roles, String situacao, String observacao) {
         this.token = accessToken;
         this.refreshToken = refreshToken;
         this.id = id;
@@ -39,142 +50,8 @@ public class JwtResponse {
         this.cidade = cidade;
         this.estado = estado;
         this.roles = roles;
-    }
-
-    public String getAccessToken() {
-        return token;
-    }
-
-    public void setAccessToken(String accessToken) {
-        this.token = accessToken;
-    }
-
-    public String getRefreshToken() {
-        return refreshToken;
-    }
-
-    public void setRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken;
-    }
-
-    public String getTokenType() {
-        return type;
-    }
-
-    public void setTokenType(String tokenType) {
-        this.type = tokenType;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getSobrenome() {
-        return sobrenome;
-    }
-
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getEmailAlternativo() {
-        return emailAlternativo;
-    }
-
-    public void setEmailAlternativo(String emailAlternativo) {
-        this.emailAlternativo = emailAlternativo;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public String getCep() {
-        return cep;
-    }
-
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
-    public String getNumeroEndereco() {
-        return numeroEndereco;
-    }
-
-    public void setNumeroEndereco(String numeroEndereco) {
-        this.numeroEndereco = numeroEndereco;
-    }
-
-    public String getComplemento() {
-        return complemento;
-    }
-
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
-    }
-
-    public String getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public List<String> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
+        this.situacao = situacao;
+        this.observacao = observacao;
     }
 
 }
