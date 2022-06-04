@@ -40,14 +40,14 @@ Projeto foi desenvolvido durante a disciplina de **Laboratório de Engenharia de
 ---
 ## ⚙️ Funcionalidades
 
-- [ ]  Cadastro de usuários;
-- [ ]  Login de Acesso ao Sistema;
-- [ ]  Catálogo Online de Livros; 
-- [ ]  Reserva Online;
-- [ ]  Envio de e-mail para empréstimos prestes a vencer (Lembrete 2 dias antes ao vencimento);
-- [ ]  Gerar Relatórios;
-- [ ]  Efetuar Empréstimos 
-- [ ]  Efetuar Devoluções;
+- [X]  Cadastro de usuários;
+- [X]  Login de Acesso ao Sistema;
+- [X]  Catálogo Online de Livros; 
+- [X]  Reserva Online;
+- [X]  Envio de e-mail para empréstimos prestes a vencer (Lembrete 2 dias antes ao vencimento);
+- [X]  Gerar Relatórios;
+- [X]  Efetuar Empréstimos 
+- [X]  Efetuar Devoluções;
 
 ---
 
