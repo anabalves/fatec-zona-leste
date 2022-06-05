@@ -161,3 +161,4 @@ INSERT INTO tb_genero (nome) VALUES ('Religião e Espiritualidade');
 INSERT INTO tb_genero (nome) VALUES ('Humanidades e Ciências Sociais');
 INSERT INTO tb_genero (nome) VALUES ('Paternidade e família');
 INSERT INTO tb_genero (nome) VALUES ('Tecnologia e Ciência');
+INSERT INTO tb_genero (nome) VALUES ('Educação');
