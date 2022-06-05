@@ -23,7 +23,6 @@ public class SignupRequest {
     private String cep;
     private String endereco;
     private String numeroEndereco;
-    private String complemento;
     private String cidade;
     private String estado;
 
@@ -36,5 +35,6 @@ public class SignupRequest {
     private String senha;
 
     private Set<String> roles;
+    private String complemento;
 
 }

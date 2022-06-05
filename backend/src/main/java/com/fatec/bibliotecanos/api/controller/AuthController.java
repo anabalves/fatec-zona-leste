@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
 
+import com.fatec.bibliotecanos.Validator;
 import com.fatec.bibliotecanos.domain.model.RefreshToken;
 import com.fatec.bibliotecanos.domain.model.Role;
 import com.fatec.bibliotecanos.domain.model.Usuario;
@@ -107,13 +108,32 @@ public class AuthController {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: O CPF já foi cadastrado!"));
         }
 
-        // Create new usuario's account
+        if (!Validator.validarEmailFatec(signUpRequest.getEmail())) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: O e-mail fatec é inválido!"));
+        }
+
+        if (!Validator.validarEmailAlternativo(signUpRequest.getEmailAlternativo())) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: O e-mail alternativo é inválido!"));
+        }
+
+        if (!Validator.validarCPF(signUpRequest.getCpf())) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: O CPF é inválido!"));
+        }
+
+        if (!Validator.validarTelefone(signUpRequest.getTelefone())) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: O Telefone é inválido!"));
+        }
+
+        if (!Validator.validarCep(signUpRequest.getCep())) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: O CEP é inválido!"));
+        }
+
         Usuario usuario = new Usuario(
                 signUpRequest.getNome(),
                 signUpRequest.getSobrenome(),
-                signUpRequest.getCpf(),
-                signUpRequest.getTelefone(),
-                signUpRequest.getCep(),
+                Validator.removeCaracteresEspeciais(signUpRequest.getCpf()),
+                Validator.removeCaracteresEspeciais(signUpRequest.getTelefone()),
+                Validator.removeCaracteresEspeciais(signUpRequest.getCep()),
                 signUpRequest.getEndereco(),
                 signUpRequest.getNumeroEndereco(),
                 signUpRequest.getComplemento(),
