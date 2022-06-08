@@ -148,6 +148,8 @@ public class ReservaEmprestimoDevolucaoServiceImpl implements ReservaEmprestimoD
             Livro livro = livroRepository.getOne(dto.getLivroId());
             ReservaEmprestimoDevolucao entity = reservaEmprestimoDevolucaoRepository.getOne(id);
             copyDtoToEntity(dto, entity);
+            entity.setDataEmprestimo(entity.getDataEmprestimo());
+            entity.setDataDevolucao(LocalDate.now());
             entity.setSituacao(EReservaEmprestimoDevolucao.CANCELADO);
             livro.setQuantidade(livro.getQuantidade() + 1);
             entity = reservaEmprestimoDevolucaoRepository.save(entity);

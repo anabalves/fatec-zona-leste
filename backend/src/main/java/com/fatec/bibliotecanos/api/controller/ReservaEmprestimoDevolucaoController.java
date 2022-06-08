@@ -82,24 +82,28 @@ public class ReservaEmprestimoDevolucaoController {
     }
 
     @GetMapping(value = "/relatorio-usuarios")
+    @PreAuthorize("hasRole('BIBLIOTECARIO') or hasRole('ADMIN')")
     public ResponseEntity<List<RelatorioUsuariosResponse>> relatorioUsuarios() {
         List<RelatorioUsuariosResponse> list = reservaEmprestimoDevolucaoServiceImpl.relatorioUsuarios();
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/relatorio-saida")
+    @PreAuthorize("hasRole('BIBLIOTECARIO') or hasRole('ADMIN')")
     public ResponseEntity<List<RelatorioSaidaResponse>> relatorioSaida() {
         List<RelatorioSaidaResponse> list = reservaEmprestimoDevolucaoServiceImpl.relatorioSaida();
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/relatorio-atrasos")
+    @PreAuthorize("hasRole('BIBLIOTECARIO') or hasRole('ADMIN')")
     public ResponseEntity<List<RelatorioAtrasosResponse>> relatorioAtrasos() {
         List<RelatorioAtrasosResponse> list = reservaEmprestimoDevolucaoServiceImpl.relatorioAtrasos();
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/relatorio-emprestimos")
+    @PreAuthorize("hasRole('BIBLIOTECARIO') or hasRole('ADMIN')")
     public ResponseEntity<List<RelatorioEmprestimosResponse>> relatorioEmprestimos() {
         List<RelatorioEmprestimosResponse> list = reservaEmprestimoDevolucaoServiceImpl.relatorioEmprestimos();
         return ResponseEntity.ok().body(list);
