@@ -225,8 +225,8 @@ body {
 
 .botao-card {
     background-color: #2B2D42;
-    color: white;
     font-family: 'Nunito Sans', sans-serif;
+    color: white;
     height: 44px;
     width: 100%;
     border-bottom-left-radius: 20px;
@@ -234,4 +234,9 @@ body {
     border: none;
     font-size: 16px;
     cursor: pointer;
+}
+
+.botao-card > a {
+    color: white;
+    text-decoration: none;
 }
