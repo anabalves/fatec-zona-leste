@@ -20,6 +20,7 @@ public interface ReservaEmprestimoDevolucaoService {
     ReservaEmprestimoDevolucaoDTO realizarCancelamento(Long id, ReservaEmprestimoDevolucaoDTO dto);
     ReservaEmprestimoDevolucaoDTO findById(Long id);
     Page<ReservaEmprestimoDevolucaoDTO> findAll(Pageable pageable);
+    List<ReservaEmprestimoDevolucaoDTO> findByUsuarioId(Long usuarioId);
     List<RelatorioUsuariosResponse> relatorioUsuarios();
     List<RelatorioSaidaResponse> relatorioSaida();
     List<RelatorioAtrasosResponse> relatorioAtrasos();
