@@ -5,6 +5,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { ConsultarLivroComponent } from './components/consultar-livro/consultar-livro.component';
+import { ReservarComponent } from './components/reservar/reservar.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'landing' },
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent },
   { path: 'landing', component: LandingComponent},
-  { path: 'consultar', component: ConsultarLivroComponent}
+  { path: 'consultar', component: ConsultarLivroComponent},
+  { path: 'reservar', component: ReservarComponent}
 ];
 
 @NgModule({

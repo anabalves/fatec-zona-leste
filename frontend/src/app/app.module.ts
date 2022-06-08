@@ -13,6 +13,8 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LandingComponent } from './components/landing/landing.component';
 import { HomeComponent } from './components/home/home.component';
+import { ConsultarLivroComponent } from './components/consultar-livro/consultar-livro.component';
+import { ReservarComponent } from './components/reservar/reservar.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { HomeComponent } from './components/home/home.component';
     RegisterComponent,
     LandingComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    ConsultarLivroComponent,
+    ReservarComponent
   ],
   imports: [
     BrowserModule,
