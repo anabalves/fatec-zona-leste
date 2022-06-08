@@ -12,8 +12,15 @@ export class WebRequestService {
     this.ROOT_URL = 'https://bibliotecanos.herokuapp.com';
   }
 
+  headers = new Headers({
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${localStorage.getItem('token')
+      }`
+  })
+
+
   get(uri: string) {
-    return this.http.get(`${this.ROOT_URL}${uri}`);
+    return this.http.get(`${this.ROOT_URL}${uri}`, { headers: this.headers });
   }
 
   post(uri: string, payload: Object) {

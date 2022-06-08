@@ -16,6 +16,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ConsultarLivroComponent } from './components/consultar-livro/consultar-livro.component';
 import { ReservarComponent } from './components/reservar/reservar.component';
 import { SucessoComponent } from './components/sucesso/sucesso.component';
+import { RegisterLivroComponent } from './components/register-livro/register-livro.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,9 @@ import { SucessoComponent } from './components/sucesso/sucesso.component';
     HomeComponent,
     ConsultarLivroComponent,
     ReservarComponent,
-    SucessoComponent
+    SucessoComponent,
+    RegisterLivroComponent,
+
   ],
   imports: [
     BrowserModule,

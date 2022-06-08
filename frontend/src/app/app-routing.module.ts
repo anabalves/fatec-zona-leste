@@ -7,16 +7,18 @@ import { LandingComponent } from './components/landing/landing.component';
 import { ConsultarLivroComponent } from './components/consultar-livro/consultar-livro.component';
 import { ReservarComponent } from './components/reservar/reservar.component';
 import { SucessoComponent } from './components/sucesso/sucesso.component';
+import { RegisterLivroComponent } from './components/register-livro/register-livro.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'landing' },
   { path: 'signin', component: SigninComponent },
+  { path: 'registerLivro', component: RegisterLivroComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'landing', component: LandingComponent},
-  { path: 'consultar', component: ConsultarLivroComponent},
-  { path: 'reservar', component: ReservarComponent},
-  { path: 'sucesso', component: SucessoComponent}
+  { path: 'landing', component: LandingComponent },
+  { path: 'consultar', component: ConsultarLivroComponent },
+  { path: 'reservar', component: ReservarComponent },
+  { path: 'sucesso', component: SucessoComponent }
 ];
 
 @NgModule({

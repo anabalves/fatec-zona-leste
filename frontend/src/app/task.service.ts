@@ -14,8 +14,8 @@ export class TaskService {
     return this.webReqService.post('/api/auth/login', { email, senha })
   }
 
-  signUp(nome: string, sobrenome: string, cpf: string, telefone: string, cep: string, endereco: string, numeroEndereco: string, complemento: string, cidade: string, estado: string, emailAlternativo: string, email: string, senha: string) {
-    return this.webReqService.post('/api/auth/signup', { nome, sobrenome, cpf, telefone, cep, endereco, numeroEndereco, complemento, cidade, estado, emailAlternativo, email, senha, role: 'user'})
+  signUp(nome: string, sobrenome: string, cpf: string, telefone: string, cep: string, endereco: string, numeroEndereco: string, cidade: string, estado: string, emailAlternativo: string, email: string, senha: string) {
+    return this.webReqService.post('/api/auth/signup', { nome, sobrenome, cpf, telefone, cep, endereco, numeroEndereco, cidade, estado, emailAlternativo, email, senha, role: 'user' })
   }
 
   logout(usuarioId: string) {
@@ -78,9 +78,6 @@ export class TaskService {
     return this.webReqService.delete('/api/generos/' + generoId)
   }
   //GENEROS -- GENEROS -- GENEROS -- GENEROS -- GENEROS -- GENEROS -- GENEROS -- GENEROS -- GENEROS -- GENEROS -- GENEROS
-
-
-
 
 
   //LIVROS -- LIVROS -- LIVROS -- LIVROS -- LIVROS -- LIVROS -- LIVROS -- LIVROS -- LIVROS -- LIVROS -- LIVROS
