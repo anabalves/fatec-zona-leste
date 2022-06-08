@@ -61,7 +61,7 @@ public class ReservaEmprestimoDevolucaoController {
     }
 
     @PutMapping(value = "/cancelar/{id}")
-    @PreAuthorize("hasRole('BIBLIOTECARIO') or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('BIBLIOTECARIO') or hasRole('ADMIN') or hasRole('USUARIO')")
     public ResponseEntity<ReservaEmprestimoDevolucaoDTO> realizarCancelamento(@PathVariable Long id, @RequestBody ReservaEmprestimoDevolucaoDTO dto) {
         dto = reservaEmprestimoDevolucaoServiceImpl.realizarCancelamento(id, dto);
         return ResponseEntity.ok().body(dto);
