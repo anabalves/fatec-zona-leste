@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { TaskService } from 'src/app/task.service';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +11,9 @@ export class HomeComponent implements OnInit {
 
   User: any = ['Super Admin', 'Author', 'Reader'];
 
-  constructor() { }
+  constructor(
+    private taskService: TaskService, private router: Router
+  ) { }
 
   ngOnInit(): void {
   }

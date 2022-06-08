@@ -25,9 +25,13 @@ button {
     top: 714px;
     background-color: #2B2D42;
     border: none;
-    color: #EDF2F4;
     font-size: 55px;
     cursor: pointer;
+}
+
+button > a {
+    text-decoration: none;
+    color: #EDF2F4;
 }
 
 section {
