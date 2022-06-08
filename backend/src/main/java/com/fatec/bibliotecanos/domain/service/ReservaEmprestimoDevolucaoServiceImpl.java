@@ -156,7 +156,7 @@ public class ReservaEmprestimoDevolucaoServiceImpl implements ReservaEmprestimoD
             return new ReservaEmprestimoDevolucaoDTO(entity);
         }
         catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundException("Empréstimo ou reserva não encontrado " + id);
+            throw new ResourceNotFoundException("Reserva não encontrada " + id);
         }
     }
 
