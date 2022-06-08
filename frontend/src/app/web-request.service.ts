@@ -20,7 +20,7 @@ export class WebRequestService {
 
 
   get(uri: string) {
-    return this.http.get(`${this.ROOT_URL}${uri}`, { headers: this.headers });
+    return this.http.get(`${this.ROOT_URL}${uri}`);
   }
 
   post(uri: string, payload: Object) {
