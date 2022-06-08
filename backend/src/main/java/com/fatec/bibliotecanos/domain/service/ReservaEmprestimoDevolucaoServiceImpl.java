@@ -310,7 +310,9 @@ public class ReservaEmprestimoDevolucaoServiceImpl implements ReservaEmprestimoD
                 "AND\n" +
                 "a.situacao = 'DEVOLVIDO'\n" +
                 "AND\n" +
-                "b.situacao = 'IRREGULAR'",
+                "b.situacao = 'IRREGULAR'\n" +
+                "AND\n" +
+                "b.situacao = 'BANIDO'",
                 BeanPropertyRowMapper.newInstance(ReservaEmprestimoDevolucaoDTO.class));
     }
 
