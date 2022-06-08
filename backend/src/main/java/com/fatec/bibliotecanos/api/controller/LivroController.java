@@ -60,6 +60,7 @@ public class LivroController {
     }
 
     @GetMapping(value = "/relatorio-acervo")
+    @PreAuthorize("hasRole('BIBLIOTECARIO') or hasRole('ADMIN')")
     public ResponseEntity<List<RelatorioAcervoResponse>> relatorioAcervo() {
         List<RelatorioAcervoResponse> list = livroServiceImpl.relatorioAcervo();
         return ResponseEntity.ok().body(list);
