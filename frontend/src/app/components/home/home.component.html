@@ -1,11 +1,101 @@
-<mat-toolbar class="app-header">
-    <span class="nav-tool-items">
-        <a mat-button routerLink="signin" routerLinkActive="active">Reservas</a>
-        <a mat-button routerLink="signin" routerLinkActive="active">Empréstimos</a>
-        <a mat-button routerLink="signin" routerLinkActive="active">Categorias</a>
-    </span>
-    <button mat-fab disabled aria-label="Example icon button with a heart icon"></button>
-</mat-toolbar>
-<div class="main-wrapper" fxLayout="row" fxLayoutAlign="center center">
-    <h1>Login realizado com sucesso!</h1>
-</div>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;600;700;800&display=swap" rel="stylesheet">   
+    <title>Home</title>
+</head>
+<body>
+    <nav id="navbar">
+        <div>
+            <a class="item" href="">Reservas</a>
+            <a class="item" href="">Empréstimos</a>
+            <a class="item" href="">Categorias</a>
+        </div>
+        <button class="btn" routerLink="/register" routerLinkActive="active">L</button>
+    </nav>
+
+    <header id="header">
+        <div class="descubra">
+            <h1 class="titulo">Descubra novos livros aqui.</h1>
+            <div class="pesquisar">
+                <input placeholder="pesquisar livros..." type="text">
+                <button>Buscar</button>
+            </div>
+        </div>
+        <div class="div-livro">
+            <div class="livro-box">
+                <div>
+                    <img src="../../../assets/dune.png" alt="">
+                </div>
+                <div>
+                    <h3 class="titulo-livro">Análise e Desenvolvimento de Sistemas</h3>
+                </div>
+                <div>
+                    <p class="seu-curso">Seu curso</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="main">
+        <div class="ver-todos">
+            <button>Ver todos os livros</button>
+        </div>
+        <div class="meus-alugueis">
+            <h1>Meus Aluguéis</h1>
+
+            <div class="section-cards">
+                <div class="card">
+                    <div>
+                        <h3>Redes de Computadores</h3>
+                    </div>
+                    <div>
+                        <img src="../../../assets/dune.png" alt="">
+                    </div>
+                    <div>
+                        <button class="botao-card">até <b>26/04</b></button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3>Redes de Computadores</h3>
+                    </div>
+                    <div>
+                        <img src="../../../assets/dune.png" alt="">
+                    </div>
+                    <div>
+                        <button class="botao-card">até <b>26/04</b></button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3>Redes de Computadores</h3>
+                    </div>
+                    <div>
+                        <img src="../../../assets/dune.png" alt="">
+                    </div>
+                    <div>
+                        <button class="botao-card">até <b>26/04</b></button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3>Redes de Computadores</h3>
+                    </div>
+                    <div>
+                        <img src="../../../assets/dune.png" alt="">
+                    </div>
+                    <div>
+                        <button class="botao-card">até <b>26/04</b></button>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </main>
+</body>
+</html>
