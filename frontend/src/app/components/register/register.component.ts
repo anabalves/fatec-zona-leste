@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 
 export class RegisterComponent implements OnInit {
 
-  User: any = ['Super Admin', 'Author', 'Reader'];
+  User: any = ['Usuario', 'Bibliotecario', 'Admin'];
 
   constructor(private taskService: TaskService, private route: Router) { }
 
@@ -24,6 +24,7 @@ export class RegisterComponent implements OnInit {
     cep: new FormControl(''),
     endereco: new FormControl(''),
     numeroEndereco: new FormControl(''),
+    complemento: new FormControl(''),
     cidade: new FormControl(''),
     estado: new FormControl(''),
     emailAlternativo: new FormControl(''),
@@ -37,7 +38,7 @@ export class RegisterComponent implements OnInit {
   register() {
     this.taskService.signUp(this.registerForm.get('nome').value, this.registerForm.get('sobrenome').value,
       this.registerForm.get('cpf').value, this.registerForm.get('telefone').value, this.registerForm.get('cep').value,
-      this.registerForm.get('endereco').value, this.registerForm.get('numeroEndereco').value,
+      this.registerForm.get('endereco').value, this.registerForm.get('numeroEndereco').value, this.registerForm.get('complemento').value,
       this.registerForm.get('cidade').value, this.registerForm.get('estado').value, this.registerForm.get('emailAlternativo').value,
       this.registerForm.get('email').value, this.registerForm.get('senha').value).subscribe((response: any) => {
         console.log(response);
