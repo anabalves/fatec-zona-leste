@@ -55,16 +55,24 @@ public class ReservaEmprestimoDevolucaoController {
 
     @PutMapping(value = "/devolver/{id}")
     @PreAuthorize("hasRole('BIBLIOTECARIO') or hasRole('ADMIN')")
-    public ResponseEntity<ReservaEmprestimoDevolucaoDTO> realizarDevolucao(@PathVariable Long id, @RequestBody ReservaEmprestimoDevolucaoDTO dto) {
-        dto = reservaEmprestimoDevolucaoServiceImpl.realizarDevolucao(id, dto);
-        return ResponseEntity.ok().body(dto);
+    public ResponseEntity<?> realizarDevolucao(@PathVariable Long id, @RequestBody ReservaEmprestimoDevolucaoDTO dto) {
+        try {
+            dto = reservaEmprestimoDevolucaoServiceImpl.realizarDevolucao(id, dto);
+            return ResponseEntity.ok().body(dto);
+        } catch (NullPointerException e) {
+            return ResponseEntity.badRequest().body("Nao Foi Possivel realizar a devolucao.");
+        }
     }
 
     @PutMapping(value = "/cancelar/{id}")
     @PreAuthorize("hasRole('BIBLIOTECARIO') or hasRole('ADMIN') or hasRole('USUARIO')")
-    public ResponseEntity<ReservaEmprestimoDevolucaoDTO> realizarCancelamento(@PathVariable Long id, @RequestBody ReservaEmprestimoDevolucaoDTO dto) {
-        dto = reservaEmprestimoDevolucaoServiceImpl.realizarCancelamento(id, dto);
-        return ResponseEntity.ok().body(dto);
+    public ResponseEntity<?> realizarCancelamento(@PathVariable Long id, @RequestBody ReservaEmprestimoDevolucaoDTO dto) {
+        try {
+            dto = reservaEmprestimoDevolucaoServiceImpl.realizarCancelamento(id, dto);
+            return ResponseEntity.ok().body(dto);
+        } catch (NullPointerException e) {
+            return ResponseEntity.badRequest().body("Nao Foi Possivel realizar o cancelamento.");
+        }
     }
 
     @GetMapping(value = "/{id}")
@@ -80,6 +88,14 @@ public class ReservaEmprestimoDevolucaoController {
         Page<ReservaEmprestimoDevolucaoDTO> list = reservaEmprestimoDevolucaoServiceImpl.findAll(pageable);
         return ResponseEntity.ok().body(list);
     }
+
+    @GetMapping(value = "/usuario/{usuarioId}")
+    @PreAuthorize("hasRole('BIBLIOTECARIO') or hasRole('ADMIN') or hasRole('USUARIO')")
+    public ResponseEntity<List<ReservaEmprestimoDevolucaoDTO>> findByUsuarioId(@PathVariable Long usuarioId) {
+        List<ReservaEmprestimoDevolucaoDTO> list = reservaEmprestimoDevolucaoServiceImpl.findByUsuarioId(usuarioId);
+        return ResponseEntity.ok().body(list);
+    }
+
 
     @GetMapping(value = "/relatorio-usuarios")
     @PreAuthorize("hasRole('BIBLIOTECARIO') or hasRole('ADMIN')")

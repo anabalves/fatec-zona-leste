@@ -108,7 +108,6 @@ public class ReservaEmprestimoDevolucaoServiceImpl implements ReservaEmprestimoD
         ReservaEmprestimoDevolucao entity;
         ReservaEmprestimoDevolucaoDTO redReservadoByUsuarioId = findREDReservadoByUsuarioId(dto.getUsuarioId());
 
-
         if (redReservadoByUsuarioId.getLivroId().equals(dto.getLivroId())) {
             entity = reservaEmprestimoDevolucaoRepository.getOne(redReservadoByUsuarioId.getId());
             copyDtoToEntity(dto, entity);
@@ -129,12 +128,16 @@ public class ReservaEmprestimoDevolucaoServiceImpl implements ReservaEmprestimoD
         try {
             Livro livro = livroRepository.getOne(dto.getLivroId());
             ReservaEmprestimoDevolucao entity = reservaEmprestimoDevolucaoRepository.getOne(id);
-            copyDtoToEntity(dto, entity);
-            entity.setDataEmprestimo(entity.getDataEmprestimo());
-            entity.setDataDevolucao(LocalDate.now());
-            entity.setSituacao(EReservaEmprestimoDevolucao.DEVOLVIDO);
-            livro.setQuantidade(livro.getQuantidade() + 1);
-            entity = reservaEmprestimoDevolucaoRepository.save(entity);
+            if (entity.getLivro().getId().equals(dto.getLivroId()) && (entity.getSituacao().equals(EReservaEmprestimoDevolucao.EM_DIA) || entity.getSituacao().equals(EReservaEmprestimoDevolucao.PERDIDO))) {
+                copyDtoToEntity(dto, entity);
+                entity.setDataEmprestimo(entity.getDataEmprestimo());
+                entity.setDataDevolucao(LocalDate.now());
+                entity.setSituacao(EReservaEmprestimoDevolucao.DEVOLVIDO);
+                livro.setQuantidade(livro.getQuantidade() + 1);
+                entity = reservaEmprestimoDevolucaoRepository.save(entity);
+            } else {
+                entity = null;
+            }
             return new ReservaEmprestimoDevolucaoDTO(entity);
         }
         catch (EntityNotFoundException e) {
@@ -147,12 +150,16 @@ public class ReservaEmprestimoDevolucaoServiceImpl implements ReservaEmprestimoD
         try {
             Livro livro = livroRepository.getOne(dto.getLivroId());
             ReservaEmprestimoDevolucao entity = reservaEmprestimoDevolucaoRepository.getOne(id);
-            copyDtoToEntity(dto, entity);
-            entity.setDataEmprestimo(entity.getDataEmprestimo());
-            entity.setDataDevolucao(LocalDate.now());
-            entity.setSituacao(EReservaEmprestimoDevolucao.CANCELADO);
-            livro.setQuantidade(livro.getQuantidade() + 1);
-            entity = reservaEmprestimoDevolucaoRepository.save(entity);
+            if (entity.getLivro().getId().equals(dto.getLivroId()) && entity.getSituacao().equals(EReservaEmprestimoDevolucao.RESERVADO)) {
+                copyDtoToEntity(dto, entity);
+                entity.setDataEmprestimo(entity.getDataEmprestimo());
+                entity.setDataDevolucao(LocalDate.now());
+                entity.setSituacao(EReservaEmprestimoDevolucao.CANCELADO);
+                livro.setQuantidade(livro.getQuantidade() + 1);
+                entity = reservaEmprestimoDevolucaoRepository.save(entity);
+            } else {
+                entity = null;
+            }
             return new ReservaEmprestimoDevolucaoDTO(entity);
         }
         catch (EntityNotFoundException e) {
@@ -171,6 +178,11 @@ public class ReservaEmprestimoDevolucaoServiceImpl implements ReservaEmprestimoD
     public Page<ReservaEmprestimoDevolucaoDTO> findAll(Pageable pageable) {
         Page<ReservaEmprestimoDevolucao> list = reservaEmprestimoDevolucaoRepository.findAll(pageable);
         return list.map(ReservaEmprestimoDevolucaoDTO::new);
+    }
+
+    @Override
+    public List<ReservaEmprestimoDevolucaoDTO> findByUsuarioId(Long usuarioId) {
+        return jdbcTemplate.query("SELECT * FROM tb_emprestimo_devolucao WHERE usuario_id=?", BeanPropertyRowMapper.newInstance(ReservaEmprestimoDevolucaoDTO.class), usuarioId);
     }
 
     @Override
