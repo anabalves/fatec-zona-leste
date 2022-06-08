@@ -1,7 +1,7 @@
 <div class="main-wrapper" fxLayout="row" fxLayoutAlign="center center">
     <mat-card class="box">
       <mat-card-header>
-        <mat-card-title>Registrar</mat-card-title>
+        <mat-card-title>Cadastrar</mat-card-title>
       </mat-card-header>
   
       <form [formGroup]="registerForm" class="example-form">
@@ -34,6 +34,10 @@
           <mat-form-field class="example-full-width">
             <input matInput formControlName="numeroEndereco" placeholder="Numero Endereco">
           </mat-form-field>
+          
+          <mat-form-field class="example-full-width">
+            <input matInput formControlName="complemento" placeholder="Complemento">
+          </mat-form-field>
 
           <mat-form-field class="example-full-width">
             <input matInput formControlName="cidade" placeholder="Cidade">
@@ -57,7 +61,7 @@
 
         </mat-card-content>
   
-        <button mat-stroked-button color="accent" class="btn-block" (click)="register()" routerLinkActive="active">Registrar</button>
+        <button mat-stroked-button color="accent" class="btn-block" (click)="register()" routerLinkActive="active">Cadastrar</button>
   
       </form>
     </mat-card>
