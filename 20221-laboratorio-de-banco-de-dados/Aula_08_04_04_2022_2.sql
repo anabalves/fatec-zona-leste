@@ -1,5 +1,5 @@
 /* Conecta ao banco DB_UNIVERSIDADE */
-USE DB_UNIVERSIDADE;
+USE AULA_08_04_04_2022;
 
 /* Criar Cursor Basico
 Utilizando o modelo criado em sala

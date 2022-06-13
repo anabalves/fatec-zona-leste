@@ -5,7 +5,7 @@ Liste os códigos dos professores com título denominado 'Doutor' que não minis
 Caso nao existam professores dar uma mensagem de erro usando um dos métodos para o tratamento de Exceções.
 */
 
-USE DB_UNIVERSIDADE;
+USE AULA_12_09_05_2022;
 
 DROP PROCEDURE IF EXISTS PROC_LIST_PROF_DOUTOR;
 

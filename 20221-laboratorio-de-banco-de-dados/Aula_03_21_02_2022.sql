@@ -1,9 +1,9 @@
 /* Projeto Modelo de Dados CURSO */
 /* 1) Criacao do banco CURSO */
-create database CURSO;
+create database AULA_03_21_02_2022;
 
 /* 2) Conecta ao banco CURSO */
-use CURSO;
+use AULA_03_21_02_2022;
 
 /* 3) Criacao da tabela ESTADO */
 create table TB_ESTADO (

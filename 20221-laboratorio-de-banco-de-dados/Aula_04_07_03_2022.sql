@@ -1,6 +1,6 @@
 /* UTILIZANDO O MODELO DE CURSO: */
 /* Conecta ao banco CURSO */
-USE CURSO;
+USE AULA_04_07_03_2022;
 
 /* A-  Exercícios de SELECT básico */                    
 /* 1). Queremos selecionar todos os alunos cadastrados. */

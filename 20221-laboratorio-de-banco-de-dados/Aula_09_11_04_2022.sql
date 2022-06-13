@@ -1,6 +1,6 @@
 /* Baseado no modelo final de dados criado em aula anterior. Resolver as seguintes questões usando SQL: */
 /* Conecta ao banco DB_UNIVERSIDADE */
-USE DB_UNIVERSIDADE;
+USE AULA_09_11_04_2022;
 
 /* 1. Obter o dia da semana, a hora de início e o número de horas de cada horário de cada turma ministrada 
 por um professor de nome `Antunes', em 2002/1, na sala número 101 do prédio de código 43423. */

@@ -22,8 +22,8 @@ Impar: Obter o numero de disciplinas do departamento denominado informatica.
 
 /* ****************** INICIO ******************** */
 /* Resposta: */
-/* Conecta ao banco DB_UNIVERSIDADE */
-USE DB_UNIVERSIDADE;
+/* Conecta ao banco PROVA_P1 */
+USE PROVA_P1;
 
 DELIMITER $$
 CREATE PROCEDURE NUMERO_DE_DISC_DEPTO_INFORMATICA()
@@ -70,13 +70,13 @@ DROP PROCEDURE NUMERO_DE_DISC_DEPTO_INFORMATICA;
 /* ****************** FIM ******************** */
 
 /* *************************** Foi necessário utilizar: *********************************** */
-DROP DATABASE IF EXISTS DB_UNIVERSIDADE;
+DROP DATABASE IF EXISTS PROVA_P1;
 
 /* Criacao do banco DB_UNIVERSIDADE */
-CREATE DATABASE DB_UNIVERSIDADE;
+CREATE DATABASE PROVA_P1;
 
 /* Conecta ao banco DB_UNIVERSIDADE */
-USE DB_UNIVERSIDADE;
+USE PROVA_P1;
 
 /* Criacao da tabela TB_DEPTO */
 CREATE TABLE TB_DEPTO (COD_DEPTO CHAR(5), NOME_DEPTO VARCHAR(40));

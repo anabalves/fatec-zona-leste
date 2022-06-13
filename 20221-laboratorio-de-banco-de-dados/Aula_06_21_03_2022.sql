@@ -1,5 +1,5 @@
 /* Considerando a Lista de Exercícios da Aula de Funções Agregadas, criar a seguinte Stored Procedure: */
-USE AUTO_PECAS;
+USE AULA_06_21_03_2022;
 
 DROP PROCEDURE IF EXISTS INSERIR_REGISTRO_TB_PECA;
 DROP PROCEDURE IF EXISTS INSERIR_X_REGISTROS_ALEATORIOS_TB_PECA;

@@ -1,9 +1,9 @@
 /* Projeto Modelo de Dados Auto_Pecas */
 /* 1) Criacao do banco Auto_Pecas */
-CREATE DATABASE IF NOT EXISTS AUTO_PECAS;
+CREATE DATABASE IF NOT EXISTS AULA_05_14_03_2022;
 
 /* 2) Conecta ao banco Auto_Pecas */
-USE AUTO_PECAS;
+USE AULA_05_14_03_2022;
 
 /* 3) Criacao da tabela TB_PECA */
 CREATE TABLE IF NOT EXISTS TB_PECA (

@@ -1,5 +1,5 @@
-/* Conecta ao banco DB_UNIVERSIDADE */
-USE DB_UNIVERSIDADE;
+/* Conecta ao banco LISTA_DE_EXERCICIOS */
+USE LISTA_DE_EXERCICIOS;
 
 /* 1) Obter todos os dados dos professores.  */
 SELECT 
@@ -26,9 +26,7 @@ FROM
     
 /* 4) Obter os diferentes valores de capacidades de turmas. NAO SEI SE INTERPRETEI DIREITO */
 SELECT DISTINCT
-	A.SIGLA_TUR,
-    B.SIGLA_TUR,
-    A.NUM_DISC,
+	SIGLA_TUR,
 	CAPAC_TUR
 FROM 
 	TB_TURMA;

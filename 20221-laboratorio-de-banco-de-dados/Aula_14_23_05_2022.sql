@@ -1,7 +1,7 @@
 /* 
 Atividade - Natural Join - Theta Join
 */
-USE DB_UNIVERSIDADE;
+USE AULA_14_23_05_2022;
 
 /* 
 1- Obter os nomes dos departamentos que têm turmas que, em 2002/1, 
