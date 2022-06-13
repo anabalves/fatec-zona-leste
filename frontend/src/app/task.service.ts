@@ -115,6 +115,10 @@ export class TaskService {
     return this.webReqService.get('/api/reserva-emprestimos-devolucoes/' + reservaEmprestimoId)
   }
 
+  reservaEmprestimosDevolucoesByUsuarioId() {
+    return this.webReqService.get('/api/reserva-emprestimos-devolucoes/usuario/' + localStorage.getItem('id'))
+  }
+
   newEmprestimo(usuarioId: string, livroId: string) {
     return this.webReqService.post('/api/reserva-emprestimos-devolucoes/emprestar', { usuarioId, livroId })
   }

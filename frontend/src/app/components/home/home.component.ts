@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TaskService } from 'src/app/task.service';
 
 @Component({
   selector: 'app-home',
@@ -8,10 +9,44 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
 
   User: any = ['Super Admin', 'Author', 'Reader'];
+  livros = [
+    { id: 1, titulo: "Bomdia" }
+  ];
 
-  constructor() { }
+  reservas = [];
+
+
+  constructor(private taskService: TaskService) {
+
+  }
 
   ngOnInit(): void {
+    this.getReservas()
+    this.getLivros();
+  }
+
+  getLivros() {
+    this.taskService.livrosPaged().subscribe((response: any) => {
+      this.livros = response.content;
+    });
+  }
+
+  getLivroById(livroId) {
+    this.taskService.livrosById(livroId).subscribe((response: any) => {
+
+      this.reservas.push(response);
+
+    });
+  }
+
+  getReservas() {
+    this.taskService.reservaEmprestimosDevolucoesByUsuarioId().subscribe((response: any) => {
+      response.map((item) => {
+        if (item.situacao != "DEVOLVIDO") {
+          this.getLivroById(item.livroId);
+        }
+      })
+    });
   }
 
 }

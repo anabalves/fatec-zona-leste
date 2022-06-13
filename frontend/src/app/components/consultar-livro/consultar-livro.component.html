@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consultar livro</title>
 </head>
+
 <body>
     <nav id="navbar"></nav>
 
     <svg class="circulo" width="664" height="923" viewBox="0 0 664 923" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="202.5" cy="461.5" r="461.5" fill="#EDF2F4"/>
+        <circle cx="202.5" cy="461.5" r="461.5" fill="#EDF2F4" />
     </svg>
 
-    <button routerLink="/reservar" >+</button>
+    <button><a [href]="'/reservar/' + idLivro">+</a></button>
 
     <section>
         <a href="" class="voltar">⎯⎯⎯⎯⎯ voltar</a>
@@ -21,16 +23,18 @@
 
     <main>
         <div>
-            <h1 class="titulo">Redes de Computadores</h1>
-            <img src="../../../assets/dune2.png" alt="">
-            <p class="status">Disponível</p>
+            <div>
+                <h1 class="titulo">{{titulo}}</h1>
+                <img src="../../../assets/dune2.png" alt="">
+                <p class="status">Disponível</p>
+            </div>
+            <div class="descricao">
+                <p><b>Autor:</b> {{autor}}</p>
+                <p><b>Lançamento:</b> October 25, 2019</p>
+                <p><b>Principal Curso:</b> Análise e Desenvolvimento de Sistemas</p>
+            </div>
         </div>
-        <div class="descricao">
-            <p><b>Autor:</b> Esther Howard</p>
-            <p><b>Lançamento:</b> October 25, 2019</p>
-            <p><b>Principal Curso:</b> Análise e Desenvolvimento de Sistemas</p>
-        </div>
-        
     </main>
 </body>
+
 </html>

@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { RegisterComponent } from './components/register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AngularMaterialModule } from './angular-material.module';
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -17,6 +17,7 @@ import { ConsultarLivroComponent } from './components/consultar-livro/consultar-
 import { ReservarComponent } from './components/reservar/reservar.component';
 import { SucessoComponent } from './components/sucesso/sucesso.component';
 import { RegisterLivroComponent } from './components/register-livro/register-livro.component';
+import { TokenInterceptor } from './token.interceptor';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,11 @@ import { RegisterLivroComponent } from './components/register-livro/register-liv
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS, 
+    useClass: TokenInterceptor, 
+    multi: true
+  }],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

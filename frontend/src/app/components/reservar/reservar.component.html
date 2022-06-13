@@ -13,8 +13,8 @@
                 <img src="../../../assets/dune.png" alt="">
             </div>
             <div class="titulo">
-                <h1>Redes de Computadores</h1>
-                <h3>Esther Howard</h3>
+                <h1>{{titulo}}</h1>
+                <h3>{{autor}}</h3>
             </div>
         </div>
         <a href="/home">Trocar...</a>
@@ -38,7 +38,7 @@
             </div>
         </div>
         <div class="botao">
-            <button routerLink="/sucesso">Reservar</button>
+            <button (click)="makeReserva()">Reservar</button>
         </div>
     </main>
 </body>

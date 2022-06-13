@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;600;700;800&display=swap" rel="stylesheet">   
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;600;700;800&display=swap"
+        rel="stylesheet">
     <title>Home</title>
 </head>
+
 <body>
     <nav id="navbar">
         <div>
@@ -50,42 +53,9 @@
             <h1>Meus Aluguéis</h1>
 
             <div class="section-cards">
-                <div class="card">
+                <div *ngFor="let reserva of reservas" class="card">
                     <div>
-                        <h3>Redes de Computadores</h3>
-                    </div>
-                    <div>
-                        <img src="../../../assets/dune.png" alt="">
-                    </div>
-                    <div>
-                        <button class="botao-card">até <b>26/04</b></button>
-                    </div>
-                </div>
-                <div class="card">
-                    <div>
-                        <h3>Redes de Computadores</h3>
-                    </div>
-                    <div>
-                        <img src="../../../assets/dune.png" alt="">
-                    </div>
-                    <div>
-                        <button class="botao-card">até <b>26/04</b></button>
-                    </div>
-                </div>
-                <div class="card">
-                    <div>
-                        <h3>Redes de Computadores</h3>
-                    </div>
-                    <div>
-                        <img src="../../../assets/dune.png" alt="">
-                    </div>
-                    <div>
-                        <button class="botao-card">até <b>26/04</b></button>
-                    </div>
-                </div>
-                <div class="card">
-                    <div>
-                        <h3>Redes de Computadores</h3>
+                        <h3>{{reserva.titulo}}</h3>
                     </div>
                     <div>
                         <img src="../../../assets/dune.png" alt="">
@@ -98,22 +68,22 @@
         </div>
 
         <div class="meus-alugueis">
-            <h1>Todos os livros</h1>
-
-            <div class="section-cards">
-                <div class="card">
+            <h1 id="fim">Todos os livros</h1>
+            <div  class="section-cards">
+                <div *ngFor="let livro of livros" class="card">
                     <div>
-                        <h3>Redes de Computadores</h3>
+                        <h3>{{livro.titulo}}</h3>
                     </div>
                     <div>
                         <img src="../../../assets/dune.png" alt="">
                     </div>
                     <div>
-                        <button class="botao-card"><a href="/consultar">Ver Detalhes</a></button>
+                        <button class="botao-card"><a [href]="'/consultar/' + livro.id">Ver Detalhes</a></button>
                     </div>
                 </div>
             </div>
         </div>
     </main>
 </body>
+
 </html>

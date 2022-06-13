@@ -26,6 +26,7 @@ export class SigninComponent implements OnInit {
       console.log(response);
       if (response.situacao == 'OK') {
         localStorage.setItem('token', response.token);
+        localStorage.setItem('id', response.id);
         this.route.navigate(['/home']);
       }
     });

@@ -16,8 +16,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent },
   { path: 'landing', component: LandingComponent },
-  { path: 'consultar', component: ConsultarLivroComponent },
-  { path: 'reservar', component: ReservarComponent },
+  { path: 'consultar/:id', component: ConsultarLivroComponent },
+  { path: 'reservar/:id', component: ReservarComponent },
   { path: 'sucesso', component: SucessoComponent }
 ];
 
