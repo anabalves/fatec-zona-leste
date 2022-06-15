@@ -7,6 +7,10 @@
     <title>Reservar</title>
 </head>
 <body>
+
+    <div class="pergunta">
+        <h2 class="subtitulo">Deseja reservar este livro?</h2>
+    </div>
     <header>
         <div class="livro">
             <div class="imagem">
@@ -21,24 +25,9 @@
     </header>
 
     <main>
-        <div class="form">
-            <div>
-                <h4 class="titulo-input">CPF</h4>
-                <input placeholder="123.456.789-01" class="input" type="text">
-            </div>
-            <div>
-                <h4 class="titulo-input">Telefone</h4>
-                <input placeholder="(11) 91234-5678" class="input" type="text">
-            </div>
-        </div>
-        <div class="form">
-            <div>
-                <h4 class="titulo-input">Data</h4>
-                <input placeholder="08/06/2002" class="input" type="text">
-            </div>
-        </div>
         <div class="botao">
-            <button (click)="makeReserva()">Reservar</button>
+            <button (click)="devolver()">Reservar</button>
+            <a class="cancelar" href="/home">Cancelar</a>
         </div>
     </main>
 </body>
