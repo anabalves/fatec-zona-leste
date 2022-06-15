@@ -82,7 +82,7 @@ export class TaskService {
 
   //LIVROS -- LIVROS -- LIVROS -- LIVROS -- LIVROS -- LIVROS -- LIVROS -- LIVROS -- LIVROS -- LIVROS -- LIVROS
   livrosPaged() {
-    return this.webReqService.get('/api/livros?page=0&size=12')
+    return this.webReqService.get('/api/livros?page=0&size=100')
   }
 
   livrosById(livroId: string) {

@@ -9,9 +9,7 @@ import { TaskService } from 'src/app/task.service';
 export class HomeComponent implements OnInit {
 
   User: any = ['Super Admin', 'Author', 'Reader'];
-  livros = [
-    { id: 1, titulo: "Bomdia" }
-  ];
+  livros = [];
 
   reservas = [];
 
@@ -21,21 +19,21 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getReservas()
+    this.getReservas();
+    console.log("init");
     this.getLivros();
+    console.log("livros init:" + this.livros);
   }
 
   getLivros() {
     this.taskService.livrosPaged().subscribe((response: any) => {
-      this.livros = response.content;
+        this.livros = response.content;
     });
   }
 
   getLivroById(livroId) {
     this.taskService.livrosById(livroId).subscribe((response: any) => {
-
       this.reservas.push(response);
-
     });
   }
 
