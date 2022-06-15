@@ -78,13 +78,6 @@ alter table tb_role add primary key (id);
 alter table tb_usuario add primary key (id);
 alter table tb_usuario_role add primary key (usuario_id, role_id);
 
-alter table tb_editora add constraint UK_3bem15f641duw36d572nxmqof unique (nome);
-alter table tb_genero add constraint UK_dd2x15l6td591powhdwepvws2 unique (nome);
-alter table tb_refresh_token add constraint UK_i63fy6f7kgr4uk9ndkxe5q8q4 unique (token);
-alter table tb_usuario add constraint UK_594wib8ansybtilla48x7vdld unique (cpf);
-alter table tb_usuario add constraint UK_spmnyb4dsul95fjmr5kmdmvub unique (email);
-alter table tb_usuario add constraint UK_spmnyb4d4533434435kmdmvub unique (email_alternativo);
-
 alter table tb_emprestimo_devolucao add constraint FKgasrwi0qsqfveawvt1atsws3r foreign key (livro_id) references tb_livro;
 alter table tb_emprestimo_devolucao add constraint FKe3ueryttqbylojb1w3pr877i4 foreign key (usuario_id) references tb_usuario;
 alter table tb_livro add constraint FKld4mxvtivc86lren384755w5r foreign key (editora_id) references tb_editora;
