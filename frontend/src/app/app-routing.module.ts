@@ -14,6 +14,10 @@ import { LivroComponent } from './components/livro/livro.component'
 import { CategoriaComponent } from './components/categoria/categoria.component'
 import { EditoraComponent } from './components/editora/editora.component'
 import { LivroeditComponent } from './components/livro/edit/livroedit/livroedit.component';
+import { CategoriaaddComponent } from './components/categoria/add/categoriaadd/categoriaadd.component';
+import { CategoriaeditComponent } from './components/categoria/edit/categoriaedit/categoriaedit.component';
+import { EditoraeditComponent } from './components/editora/edit/editoraedit/editoraedit.component';
+import { EditoraaddComponent } from './components/editora/add/editoraadd/editoraadd.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'landing' },
@@ -30,7 +34,11 @@ const routes: Routes = [
   { path: 'livro', component: LivroComponent },
   { path: 'livro/editar/:id', component: LivroeditComponent },
   { path: 'categoria', component: CategoriaComponent },
+  { path: 'categoria/add', component: CategoriaaddComponent },
+  { path: 'categoria/editar/:id', component: CategoriaeditComponent },
   { path: 'editora', component: EditoraComponent },
+  { path: 'editora/add', component: EditoraaddComponent },
+  { path: 'editora/editar/:id', component: EditoraeditComponent },
 
 ];
 
