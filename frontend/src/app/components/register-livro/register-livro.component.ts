@@ -41,9 +41,7 @@ export class RegisterLivroComponent implements OnInit {
       this.livroForm.get('editoraId').value,
     ).subscribe((response: any) => {
       console.log(response);
-      if (response.situacao == 'OK') {
-        this.route.navigate(['/home']);
-      }
+      this.route.navigate(['/home-admin']);
     });
   }
 

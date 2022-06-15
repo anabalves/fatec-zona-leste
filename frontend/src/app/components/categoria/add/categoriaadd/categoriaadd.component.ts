@@ -42,9 +42,7 @@ export class CategoriaaddComponent implements OnInit {
       this.categoriaForm.get('nome').value
     ).subscribe((response: any) => {
       console.log(response);
-      if (response.situacao == 'OK') {
-        this.rota.navigate(['/categoria']);
-      }
+      this.rota.navigate(['/categoria']);
     });
   }
 

@@ -42,9 +42,7 @@ export class EditoraaddComponent implements OnInit {
       this.editoraForm.get('nome').value
     ).subscribe((response: any) => {
       console.log(response);
-      if (response.situacao == 'OK') {
-        this.rota.navigate(['/editora']);
-      }
+      this.rota.navigate(['/editora']);
     });
   }
 
