@@ -18,6 +18,7 @@ import { ReservarComponent } from './components/reservar/reservar.component';
 import { SucessoComponent } from './components/sucesso/sucesso.component';
 import { RegisterLivroComponent } from './components/register-livro/register-livro.component';
 import { TokenInterceptor } from './token.interceptor';
+import { TrocarLivroComponent } from './components/trocar-livro/trocar-livro.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { TokenInterceptor } from './token.interceptor';
     ReservarComponent,
     SucessoComponent,
     RegisterLivroComponent,
-
+    TrocarLivroComponent,
   ],
   imports: [
     BrowserModule,

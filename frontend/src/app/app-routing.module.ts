@@ -8,6 +8,7 @@ import { ConsultarLivroComponent } from './components/consultar-livro/consultar-
 import { ReservarComponent } from './components/reservar/reservar.component';
 import { SucessoComponent } from './components/sucesso/sucesso.component';
 import { RegisterLivroComponent } from './components/register-livro/register-livro.component';
+import { TrocarLivroComponent } from './components/trocar-livro/trocar-livro.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'landing' },
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: 'landing', component: LandingComponent },
   { path: 'consultar/:id', component: ConsultarLivroComponent },
   { path: 'reservar/:id', component: ReservarComponent },
-  { path: 'sucesso', component: SucessoComponent }
+  { path: 'sucesso', component: SucessoComponent },
+  { path: 'trocar', component: TrocarLivroComponent }
 ];
 
 @NgModule({
