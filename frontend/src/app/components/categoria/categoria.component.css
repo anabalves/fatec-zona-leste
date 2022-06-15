@@ -187,6 +187,13 @@ body {
 
 .section-cards {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.section-cards::after {
+    content: "";
+    flex: auto;
 }
 
 .card {
@@ -196,7 +203,6 @@ body {
     border-radius: 20px;
     box-sizing: border-box;
     margin-bottom: 10%;
-    margin-right: 50px;
 }
 
 .card > div {

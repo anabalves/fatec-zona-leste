@@ -165,11 +165,15 @@ body {
     height: 35px;
     width: 150px;
     border-color: #2B2D42;
-    color: #2B2D42;
     font-size: 13px;
     font-weight: bold;
     cursor: pointer;
     font-family: 'Nunito Sans', sans-serif;
+}
+
+.ver-todos > button > a {
+    text-decoration: none;
+    color: #2B2D42;
 }
 
 /* meus alugueis */
@@ -188,6 +192,13 @@ body {
 
 .section-cards {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.section-cards::after {
+    content: "";
+    flex: auto;
 }
 
 .card {
@@ -197,7 +208,6 @@ body {
     border-radius: 20px;
     box-sizing: border-box;
     margin-bottom: 10%;
-    margin-right: 50px;
 }
 
 .card > div {
