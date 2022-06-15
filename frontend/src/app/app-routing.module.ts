@@ -19,6 +19,7 @@ import { CategoriaeditComponent } from './components/categoria/edit/categoriaedi
 import { EditoraeditComponent } from './components/editora/edit/editoraedit/editoraedit.component';
 import { EditoraaddComponent } from './components/editora/add/editoraadd/editoraadd.component';
 import { DevolverComponent } from './components/devolver/devolver.component';
+import { TrocarLivroComponent } from './components/trocar-livro/trocar-livro.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'landing' },
@@ -41,6 +42,7 @@ const routes: Routes = [
   { path: 'editora/add', component: EditoraaddComponent },
   { path: 'editora/editar/:id', component: EditoraeditComponent },
   { path: 'devolver/:id', component: DevolverComponent },
+  { path: 'trocar', component: TrocarLivroComponent },
 ];
 
 @NgModule({
