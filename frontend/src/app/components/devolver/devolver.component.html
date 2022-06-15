@@ -4,20 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sucesso</title>
+    <title>Devolver</title>
 </head>
 <body>
     <main>
         <div>
-            <h1 class="titulo">OBRIGADO!</h1>
-        </div>
-        <div>
-            <h2 class="subtitulo">SEU LIVRO FOI RESERVADO COM SUCESSO!</h2>
+            <h2 class="subtitulo">Tem certeza que deseja devolver este livro?</h2>
         </div>
     </main>
 
     <div class="botao">
-        <button><a href="/home">Voltar</a></button>
+        <button (click)="devolver()">Devolver</button>
+        <a class="cancelar" href="/home">Cancelar</a>
     </div>
 </body>
 </html>

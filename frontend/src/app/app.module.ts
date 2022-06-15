@@ -28,10 +28,7 @@ import { CategoriaeditComponent } from './components/categoria/edit/categoriaedi
 import { CategoriaaddComponent } from './components/categoria/add/categoriaadd/categoriaadd.component'
 import { EditoraaddComponent } from './components/editora/add/editoraadd/editoraadd.component'
 import { EditoraeditComponent } from './components/editora/edit/editoraedit/editoraedit.component'
-
-
-
-
+import { DevolverComponent } from './components/devolver/devolver.component'
 
 @NgModule({
   declarations: [
@@ -55,7 +52,7 @@ import { EditoraeditComponent } from './components/editora/edit/editoraedit/edit
     CategoriaaddComponent,
     EditoraaddComponent,
     EditoraeditComponent,
-
+    DevolverComponent,
   ],
   imports: [
     BrowserModule,

@@ -18,6 +18,7 @@ import { CategoriaaddComponent } from './components/categoria/add/categoriaadd/c
 import { CategoriaeditComponent } from './components/categoria/edit/categoriaedit/categoriaedit.component';
 import { EditoraeditComponent } from './components/editora/edit/editoraedit/editoraedit.component';
 import { EditoraaddComponent } from './components/editora/add/editoraadd/editoraadd.component';
+import { DevolverComponent } from './components/devolver/devolver.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'landing' },
@@ -39,7 +40,7 @@ const routes: Routes = [
   { path: 'editora', component: EditoraComponent },
   { path: 'editora/add', component: EditoraaddComponent },
   { path: 'editora/editar/:id', component: EditoraeditComponent },
-
+  { path: 'devolver/:id', component: DevolverComponent },
 ];
 
 @NgModule({
