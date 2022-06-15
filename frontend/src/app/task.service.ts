@@ -33,7 +33,7 @@ export class TaskService {
 
   //EDITORAS -- EDITORAS -- EDITORAS -- EDITORAS -- EDITORAS -- EDITORAS -- EDITORAS -- EDITORAS -- EDITORAS -- EDITORAS -- EDITORAS
   editorasPaged() {
-    return this.webReqService.get('/api/editoras?page=0&size=40')
+    return this.webReqService.get('/api/editoras?page=0&size=100')
   }
 
   editoraById(editoraId: string) {
@@ -59,7 +59,7 @@ export class TaskService {
 
   //GENEROS -- GENEROS -- GENEROS -- GENEROS -- GENEROS -- GENEROS -- GENEROS -- GENEROS -- GENEROS -- GENEROS -- GENEROS
   generosPaged() {
-    return this.webReqService.get('/api/generos?page=0&size=12')
+    return this.webReqService.get('/api/generos?page=0&size=100')
   }
 
   generoById(generoId: string) {
@@ -82,7 +82,7 @@ export class TaskService {
 
   //LIVROS -- LIVROS -- LIVROS -- LIVROS -- LIVROS -- LIVROS -- LIVROS -- LIVROS -- LIVROS -- LIVROS -- LIVROS
   livrosPaged() {
-    return this.webReqService.get('/api/livros?page=0&size=12')
+    return this.webReqService.get('/api/livros?page=0&size=100')
   }
 
   livrosById(livroId: string) {
@@ -108,7 +108,7 @@ export class TaskService {
 
   //RESERVA -- EMPRESTIMO -- DEVOLUCAO -- RESERVA -- EMPRESTIMO -- DEVOLUCAO -- RESERVA -- EMPRESTIMO -- DEVOLUCAO
   reservaEmprestimosDevolucoesPaged() {
-    return this.webReqService.get('/api/reserva-emprestimos-devolucoes?page=0&size=12')
+    return this.webReqService.get('/api/reserva-emprestimos-devolucoes?page=0&size=100')
   }
 
   reservaEmprestimosDevolucoesById(reservaEmprestimoId: string) {
@@ -142,7 +142,7 @@ export class TaskService {
 
   //USUARIOS -- USUARIOS -- USUARIOS -- USUARIOS -- USUARIOS -- USUARIOS -- USUARIOS -- USUARIOS -- USUARIOS -- USUARIOS -- USUARIOS
   usuariosPaged() {
-    return this.webReqService.get('/api/usuarios?page=0&size=12')
+    return this.webReqService.get('/api/usuarios?page=0&size=100')
   }
 
   usuariosById(usuarioId: string) {
