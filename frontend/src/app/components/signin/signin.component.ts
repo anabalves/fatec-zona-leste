@@ -27,7 +27,12 @@ export class SigninComponent implements OnInit {
       if (response.situacao == 'OK') {
         localStorage.setItem('token', response.token);
         localStorage.setItem('id', response.id);
-        this.route.navigate(['/home']);
+        localStorage.setItem('role', response.roles[0]);
+        if (response.roles[0] == 'ROLE_BIBLIOTECARIO') {
+          this.route.navigate(['/home-admin']);
+        } else {
+          this.route.navigate(['/home']);
+        }
       }
     });
   }
