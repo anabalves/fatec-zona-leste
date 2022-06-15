@@ -94,7 +94,7 @@ export class TaskService {
   }
 
   updateLivro(livroId: string, titulo: string, descricao: string, autor: string, edicao: string, isbn: string, quantidade: string, imgUrl: string, anoPublicacao: string, generoId: string, editoraId: string) {
-    return this.webReqService.post('/api/livros/' + livroId, { titulo, descricao, autor, edicao, isbn, quantidade, imgUrl, anoPublicacao, generoId, editoraId })
+    return this.webReqService.put('/api/livros/' + livroId, { titulo, descricao, autor, edicao, isbn, quantidade, imgUrl, anoPublicacao, generoId, editoraId })
   }
 
   deleteLivro(livroId: string) {
