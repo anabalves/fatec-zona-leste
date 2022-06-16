@@ -122,8 +122,8 @@ public class DoacaoDAOImpl implements DoacaoDAO {
     }
 
     @Override
-    public Map<Integer, ArrayList> listarQuantidadePessoasPorMes() {
-        String sql = "CALL GRAFICO_QUANTIDADE_PESSOAS_POR_MES();";
+    public Map<Integer, ArrayList> listarQuantidadeVisitasPorMes() {
+        String sql = "CALL GRAFICO_QUANTIDADE_VISITAS_POR_MES();";
         Map<Integer, ArrayList> retorno = new HashMap<>();
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);

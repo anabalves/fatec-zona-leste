@@ -77,7 +77,7 @@ public class HomeController implements Initializable {
         observableListMeses.addAll(Arrays.asList(arrayMeses));
         categoryAxis.setCategories(observableListMeses);
         doacaoDAO.setConnection(connection);
-        Map<Integer, ArrayList> dados = doacaoDAO.listarQuantidadePessoasPorMes();
+        Map<Integer, ArrayList> dados = doacaoDAO.listarQuantidadeVisitasPorMes();
         for (Map.Entry<Integer, ArrayList> dadosItem : dados.entrySet()) {
             XYChart.Series<String, Integer> series = new XYChart.Series<>();
             series.setName(dadosItem.getKey().toString());

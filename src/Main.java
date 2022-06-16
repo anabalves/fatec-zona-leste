@@ -9,7 +9,6 @@ import java.io.IOException;
 
 public class Main extends Application {
 
-
     public static void main(String[] args) {
         launch(args);
     }
@@ -20,7 +19,7 @@ public class Main extends Application {
 
         Scene scene = new Scene(root);
 
-        stage.getIcons().add(new Image(ClassLoader.getSystemResourceAsStream("assets/logo.png")));
+        stage.getIcons().add(new Image(ClassLoader.getSystemResourceAsStream("assets/images/logo.png")));
         stage.setScene(scene);
         stage.setTitle("Database Museum");
         stage.setResizable(false);

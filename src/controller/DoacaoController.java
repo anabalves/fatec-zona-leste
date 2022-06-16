@@ -25,6 +25,12 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import model.Doacao;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import util.GerenciadorTelas;
 
 import java.io.IOException;
@@ -71,6 +77,9 @@ public class DoacaoController implements Initializable {
 
     @FXML
     private Button btnRecarregar;
+
+    @FXML
+    private Button btnImprimir;
 
     @FXML
     private ToggleGroup group;
@@ -128,6 +137,19 @@ public class DoacaoController implements Initializable {
         SortedList<Doacao> doacaoSortedList = new SortedList<>(doacaoFilteredList);
         doacaoSortedList.comparatorProperty().bind(tbDoacoa.comparatorProperty());
         tbDoacoa.setItems(doacaoSortedList);
+
+        btnImprimir.setOnAction(event -> {
+            try {
+                URL url = getClass().getResource("/view/RelatorioValorTotalDeDoacoesPorMes.jasper");
+                JasperReport jasperReport = (JasperReport) JRLoader.loadObject(url);
+
+                JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, connection);
+                JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
+                jasperViewer.setVisible(true);
+            } catch (JRException e) {
+                e.printStackTrace();
+            }
+        });
 
         btnHome.setOnAction(event -> {
             try {

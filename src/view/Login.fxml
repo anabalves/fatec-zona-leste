@@ -18,7 +18,7 @@
             <children>
                 <ImageView fitHeight="138.0" fitWidth="233.0" layoutX="122.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../assets/logo.png" />
+                        <Image url="@../assets/images/logo.png" />
                     </image>
                 </ImageView>
                 <Label alignment="CENTER" layoutX="105.0" layoutY="314.0" prefHeight="23.0" prefWidth="173.0" text="Database Museum" textFill="WHITE">

@@ -14,6 +14,6 @@ public interface DoacaoDAO {
     List<Doacao> listar();
     Doacao buscar(Long id);
 
-    Map<Integer, ArrayList> listarQuantidadePessoasPorMes();
+    Map<Integer, ArrayList> listarQuantidadeVisitasPorMes();
 
 }

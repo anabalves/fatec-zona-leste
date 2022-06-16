@@ -53,7 +53,7 @@
             <children>
                 <VBox prefHeight="579.0" prefWidth="785.0" style="-fx-background-color: #FFF; -fx-background-radius: 25;">
                <children>
-                  <BarChart fx:id="barChart" prefHeight="582.0" prefWidth="785.0" title="Quantidade de Pessoas Por Mês">
+                  <BarChart fx:id="barChart" prefHeight="582.0" prefWidth="785.0" title="Quantidade de Visitas Por Mês">
                     <xAxis>
                       <CategoryAxis fx:id="categoryAxis" side="BOTTOM" />
                     </xAxis>
