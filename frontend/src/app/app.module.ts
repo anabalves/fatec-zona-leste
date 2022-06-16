@@ -30,6 +30,7 @@ import { EditoraaddComponent } from './components/editora/add/editoraadd/editora
 import { EditoraeditComponent } from './components/editora/edit/editoraedit/editoraedit.component'
 import { DevolverComponent } from './components/devolver/devolver.component'
 import { TrocarLivroComponent } from './components/trocar-livro/trocar-livro.component';
+import { DeleteLivroComponent } from './components/livro/delete-livro/delete-livro.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { TrocarLivroComponent } from './components/trocar-livro/trocar-livro.com
     EditoraeditComponent,
     DevolverComponent,
     TrocarLivroComponent,
+    DeleteLivroComponent,
   ],
   imports: [
     BrowserModule,

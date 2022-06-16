@@ -20,6 +20,7 @@ import { EditoraeditComponent } from './components/editora/edit/editoraedit/edit
 import { EditoraaddComponent } from './components/editora/add/editoraadd/editoraadd.component';
 import { DevolverComponent } from './components/devolver/devolver.component';
 import { TrocarLivroComponent } from './components/trocar-livro/trocar-livro.component';
+import { DeleteLivroComponent } from './components/livro/delete-livro/delete-livro.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'landing' },
@@ -43,6 +44,7 @@ const routes: Routes = [
   { path: 'editora/editar/:id', component: EditoraeditComponent },
   { path: 'devolver/:id', component: DevolverComponent },
   { path: 'trocar', component: TrocarLivroComponent },
+  { path: 'livro/deleteLivro/:id', component: DeleteLivroComponent },
 ];
 
 @NgModule({
