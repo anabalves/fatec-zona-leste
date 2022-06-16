@@ -20,17 +20,29 @@ header > h1 {
     color: #2B2D42;
 }
 
-/* main */
+/* section */
 
-main {
+section {
     padding-left: 10%;
     padding-right: 10%;
     padding-top: 3%;
+    background-color: white;
+}
+
+section > h2 {
+    font-family: 'Nunito Sans', sans-serif;
+    color: #2B2D42;
+    font-weight: 700;
+}
+
+table {
+    margin-top: 1%;
 }
 
 .botao {
     display: flex;
-    padding-top: 10%;
+    padding-top: 3%;
+    padding-bottom: 3%;
 }
 
 .botao > button {

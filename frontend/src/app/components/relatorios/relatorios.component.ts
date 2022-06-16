@@ -9,17 +9,40 @@ import { TaskService } from 'src/app/task.service';
 export class RelatoriosComponent implements OnInit {
 
   emprestimos = [];
+  acervos = [];
+  saidas = [];
+  usuarios = [];
 
   constructor(private taskService: TaskService) { }
 
   ngOnInit(): void {
     this.getRelatorioEmprestimos();
+    this.getRelatorioAcervos();
+    this.getRelatorioSaidas();
+    this.getRelatorioUsuarios();
   }
 
   getRelatorioEmprestimos() {
     this.taskService.relatorioEmprestimos().subscribe((response: any) => {
       this.emprestimos = response;
-      console.log(this.emprestimos)
+    });
+  }
+
+  getRelatorioAcervos() {
+    this.taskService.relatorioAcervo().subscribe((response: any) => {
+      this.acervos = response;
+    });
+  }
+
+  getRelatorioSaidas() {
+    this.taskService.relatorioSaida().subscribe((response: any) => {
+      this.saidas = response;
+    });
+  }
+
+  getRelatorioUsuarios() {
+    this.taskService.relatorioUsuarios().subscribe((response: any) => {
+      this.usuarios = response;
     });
   }
 
