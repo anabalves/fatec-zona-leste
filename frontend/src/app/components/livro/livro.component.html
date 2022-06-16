@@ -32,7 +32,7 @@
     <main id="main">
         <div class="ver-todos">
             <a [href]="'/registerLivro'">
-                <button >Adicionar um Livro</button>
+                <button>Adicionar um Livro</button>
             </a>
         </div>
 
@@ -47,6 +47,7 @@
                     </div>
                     <div>
                         <button class="botao-card"><a [href]="'/livro/editar/' + livro.id">Editar</a></button>
+                        <button class="botao-card"><a [href]="'/livro/deleteLivro/' + livro.id">Excluir</a></button>
                     </div>
                 </div>
             </div>

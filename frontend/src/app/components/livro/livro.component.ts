@@ -33,9 +33,7 @@ export class LivroComponent implements OnInit {
 
   getLivroById(livroId) {
     this.taskService.livrosById(livroId).subscribe((response: any) => {
-
       this.reservas.push(response);
-
     });
   }
 
