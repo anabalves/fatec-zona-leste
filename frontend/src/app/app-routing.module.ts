@@ -21,6 +21,7 @@ import { EditoraaddComponent } from './components/editora/add/editoraadd/editora
 import { DevolverComponent } from './components/devolver/devolver.component';
 import { TrocarLivroComponent } from './components/trocar-livro/trocar-livro.component';
 import { DeleteLivroComponent } from './components/livro/delete-livro/delete-livro.component';
+import { RelatoriosComponent } from './components/relatorios/relatorios.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'landing' },
@@ -45,6 +46,7 @@ const routes: Routes = [
   { path: 'devolver/:id', component: DevolverComponent },
   { path: 'trocar', component: TrocarLivroComponent },
   { path: 'livro/deleteLivro/:id', component: DeleteLivroComponent },
+  { path: 'relatorio', component: RelatoriosComponent },
 ];
 
 @NgModule({

@@ -1,1 +1,35 @@
-<p>relatorios works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <h1>Relatórios</h1>
+    </header>
+
+    <main>
+        <table border="1">
+            <tr>
+                <td>Id</td>
+                <td>Nome do usuário</td>
+                <td>Título</td>
+                <td>Situação</td>
+                <td>Data do Empréstimo</td>
+                <td>Data da Devolução</td>
+            </tr>
+            <tr *ngFor="let emprestimo of emprestimos">
+                <td>{{emprestimo.id}}</td>
+                <td>{{emprestimo.nomeUsuario}}</td>
+                <td>{{emprestimo.titulo}}</td>
+                <td>{{emprestimo.situacao}}</td>
+                <td>{{emprestimo.dataEmprestimo}}</td>
+                <td>{{emprestimo.dataDevolucao}}</td>
+            </tr>
+        </table>
+    </main>
+</body>
+</html>
