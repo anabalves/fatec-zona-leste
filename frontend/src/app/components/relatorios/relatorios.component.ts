@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TaskService } from 'src/app/task.service';
 
 @Component({
   selector: 'app-relatorios',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RelatoriosComponent implements OnInit {
 
-  constructor() { }
+  emprestimos = [];
+
+  constructor(private taskService: TaskService) { }
 
   ngOnInit(): void {
+    this.getRelatorioEmprestimos();
+  }
+
+  getRelatorioEmprestimos() {
+    this.taskService.relatorioEmprestimos().subscribe((response: any) => {
+      this.emprestimos = response;
+      console.log(this.emprestimos)
+    });
+  }
+
+  imprimir() {
+    window.print();
   }
 
 }
