@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        <h1>Relatórios</h1>
+        <h1>Relatórios de Empréstimos</h1>
     </header>
 
     <main>
@@ -30,6 +30,10 @@
                 <td>{{emprestimo.dataDevolucao}}</td>
             </tr>
         </table>
+
+        <div class="botao">
+            <button (click)="imprimir()">Imprimir</button>
+        </div>
     </main>
 </body>
 </html>

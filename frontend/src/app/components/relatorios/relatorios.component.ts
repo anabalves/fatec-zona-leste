@@ -23,4 +23,8 @@ export class RelatoriosComponent implements OnInit {
     });
   }
 
+  imprimir() {
+    window.print();
+  }
+
 }
