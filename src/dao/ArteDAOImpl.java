@@ -91,12 +91,12 @@ public class ArteDAOImpl implements ArteDAO {
     }
 
     @Override
-    public Arte buscar(Long id) {
-        String sql = "SELECT `ID`,`NOME_OBRA`, `NOME_ARTISTA`, `DATA_CRIACAO`,`DESCRICAO` FROM `TB_ARTE` WHERE `ID`=?;";
+    public Arte buscar(String nomeObra) {
+        String sql = "SELECT `ID`,`NOME_OBRA`, `NOME_ARTISTA`, `DATA_CRIACAO`,`DESCRICAO` FROM `TB_ARTE` WHERE `NOME_OBRA`=?;";
         Arte arte = new Arte();
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setLong(1, id);
+            stmt.setString(1, nomeObra);
             ResultSet resultado = stmt.executeQuery();
             if (resultado.next()) {
                 arte.setId(resultado.getLong("ID"));

@@ -121,12 +121,12 @@ public class FuncionarioDAOImpl implements FuncionarioDAO {
     }
 
     @Override
-    public Funcionario buscar(Long id) {
-        String sql = "SELECT `ID`,`NOME`, `CPF`, `TELEFONE`, `CARGO`, `TURNO`, `EMAIL`, `SENHA` FROM `TB_FUNCIONARIO` WHERE `ID`=?;";
+    public Funcionario buscar(String nome) {
+        String sql = "SELECT `ID`,`NOME`, `CPF`, `TELEFONE`, `CARGO`, `TURNO`, `EMAIL`, `SENHA` FROM `TB_FUNCIONARIO` WHERE `NOME`=?;";
         Funcionario funcionario = new Funcionario();
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setLong(1, id);
+            stmt.setString(1, nome);
             ResultSet resultado = stmt.executeQuery();
             if (resultado.next()) {
                 funcionario.setId(resultado.getLong("ID"));

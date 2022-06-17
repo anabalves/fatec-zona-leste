@@ -74,7 +74,9 @@ public class HomeController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         String[] arrayMeses = {"Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"};
+
         observableListMeses.addAll(Arrays.asList(arrayMeses));
+
         categoryAxis.setCategories(observableListMeses);
         doacaoDAO.setConnection(connection);
         Map<Integer, ArrayList> dados = doacaoDAO.listarQuantidadeVisitasPorMes();

@@ -70,7 +70,7 @@
 .chart {
     -fx-padding: 10px;
     -fx-background-color: transparent;
-    -fx-legend-visible: false;
+    -fx-legend-visible: true;
 }
 .chart-plot-background {
     -fx-background-color:transparent;

@@ -124,8 +124,6 @@ public class ReservaController implements Initializable {
 
                 if (reserva.getNome().toLowerCase().indexOf(pesquisarPalavra) > -1) {
                     return true;
-                } else if (reserva.getCpf().toLowerCase().indexOf(pesquisarPalavra) > -1) {
-                    return true;
                 } else {
                     return false;
                 }

@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1010.0" style="-fx-background-color: #004085;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DoacaoController">
+<AnchorPane prefHeight="600.0" prefWidth="1010.0" style="-fx-background-color: #004085;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DoacaoController">
     <children>
         <VBox alignment="CENTER" prefHeight="600.0" prefWidth="215.0" style="-fx-background-color: #004085;">
             <children>
@@ -58,12 +50,11 @@
                     <children>
                         <Pane prefHeight="59.0" prefWidth="785.0">
                             <children>
-                                <TextField fx:id="tfBuscarDoacao" layoutX="287.0" layoutY="17.0" prefHeight="25.0" prefWidth="438.0" />
+                                <TextField fx:id="tfBuscarDoacao" layoutX="287.0" layoutY="17.0" prefHeight="25.0" prefWidth="473.0" />
                                 <Button fx:id="btnAdicionar" layoutX="28.0" layoutY="16.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="80.0" text="Adicionar" />
                                 <Label fx:id="lblBuscarDoacao" layoutX="196.0" layoutY="17.0" prefHeight="25.0" prefWidth="80.0" text="Buscar Doação" />
                                 <Button fx:id="btnRecarregar" layoutX="114.0" layoutY="16.0" mnemonicParsing="false" text="🔄" />
                                 <Button fx:id="btnImprimir" layoutX="154.0" layoutY="16.0" mnemonicParsing="false" text="🖶" />
-                                <Button fx:id="btnPesquisar" layoutX="732.0" layoutY="16.0" mnemonicParsing="false" text="🔍" />
                             </children>
                         </Pane>
                         <TableView fx:id="tbDoacoa" prefHeight="522.0" prefWidth="785.0" style="-fx-background-radius: 25;" stylesheets="@styles/style3.css">

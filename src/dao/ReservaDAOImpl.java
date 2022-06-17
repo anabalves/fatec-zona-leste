@@ -101,12 +101,12 @@ public class ReservaDAOImpl implements ReservaDAO {
     }
 
     @Override
-    public Reserva buscar(Long id) {
-        String sql = "SELECT `ID`, `NOME`, `CPF`, `TELEFONE`, `QUANTIDADE_PESSOAS`, `DATA_RESERVA`, `HORA_INICIO` FROM `TB_RESERVA` WHERE `ID`=?;";
+    public Reserva buscar(String nome) {
+        String sql = "SELECT `ID`, `NOME`, `CPF`, `TELEFONE`, `QUANTIDADE_PESSOAS`, `DATA_RESERVA`, `HORA_INICIO` FROM `TB_RESERVA` WHERE `NOME`=?;";
         Reserva reserva = new Reserva();
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setLong(1, id);
+            stmt.setString(1, nome);
             ResultSet resultado = stmt.executeQuery();
             if (resultado.next()) {
                 reserva.setId(resultado.getLong("ID"));

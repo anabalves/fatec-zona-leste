@@ -10,6 +10,6 @@ public interface ReservaDAO {
     boolean alterar(Long id, Reserva reserva);
     boolean deletar(Long id);
     List<Reserva> listar();
-    Reserva buscar(Long id);
+    Reserva buscar(String nome);
 
 }

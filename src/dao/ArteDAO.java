@@ -11,6 +11,6 @@ public interface ArteDAO {
     boolean alterar(Long id, Arte arte);
     boolean deletar(Long id);
     List<Arte> listar();
-    Arte buscar(Long id);
+    Arte buscar(String nomeObra);
 
 }

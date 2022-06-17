@@ -120,12 +120,6 @@ public class FuncionarioController implements Initializable {
 
                 if (funcionario.getNome().toLowerCase().indexOf(pesquisarPalavra) > -1) {
                     return true;
-                } else if (funcionario.getCpf().toLowerCase().indexOf(pesquisarPalavra) > -1) {
-                    return true;
-                } else if (funcionario.getCargo().toLowerCase().indexOf(pesquisarPalavra) > -1) {
-                    return true;
-                } else if (funcionario.getTurno().toLowerCase().indexOf(pesquisarPalavra) > -1) {
-                    return true;
                 } else {
                     return false;
                 }

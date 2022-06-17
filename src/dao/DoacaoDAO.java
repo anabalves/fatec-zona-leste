@@ -12,7 +12,7 @@ public interface DoacaoDAO {
     boolean alterar(Long id, Doacao doacao);
     boolean deletar(Long id);
     List<Doacao> listar();
-    Doacao buscar(Long id);
+    Doacao buscar(String nomeInstituicao);
 
     Map<Integer, ArrayList> listarQuantidadeVisitasPorMes();
 

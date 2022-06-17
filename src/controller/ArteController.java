@@ -114,8 +114,6 @@ public class ArteController implements Initializable {
 
                 if (arte.getNomeObra().toLowerCase().indexOf(pesquisarPalavra) > -1) {
                     return true;
-                } else if (arte.getNomeArtista().toLowerCase().indexOf(pesquisarPalavra) > -1) {
-                    return true;
                 } else {
                     return false;
                 }

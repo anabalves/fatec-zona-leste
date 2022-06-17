@@ -11,7 +11,7 @@ public interface FuncionarioDAO {
     boolean alterar(Long id, Funcionario funcionario);
     boolean deletar(Long id);
     List<Funcionario> listar();
-    Funcionario buscar(Long id);
+    Funcionario buscar(String nome);
     boolean existeCpf(String cpf);
     boolean existeEmail(String email);
     boolean alterarSenha(String email, String senha);

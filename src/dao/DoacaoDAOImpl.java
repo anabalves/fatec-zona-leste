@@ -100,12 +100,12 @@ public class DoacaoDAOImpl implements DoacaoDAO {
     }
 
     @Override
-    public Doacao buscar(Long id) {
-        String sql = "SELECT `ID`,`NOME_INSTITUICAO`, `CNPJ`, `VALOR_DOADO`, `DATA_DOACAO`, `DESCRICAO` FROM `TB_DOACAO` WHERE `ID`=?;";
+    public Doacao buscar(String nomeInstituicao) {
+        String sql = "SELECT `ID`,`NOME_INSTITUICAO`, `CNPJ`, `VALOR_DOADO`, `DATA_DOACAO`, `DESCRICAO` FROM `TB_DOACAO` WHERE `NOME_INSTITUICAO`=?;";
         Doacao doacao = new Doacao();
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setLong(1, id);
+            stmt.setString(1, nomeInstituicao);
             ResultSet resultado = stmt.executeQuery();
             if (resultado.next()) {
                 doacao.setId(resultado.getLong("ID"));
@@ -124,12 +124,14 @@ public class DoacaoDAOImpl implements DoacaoDAO {
     @Override
     public Map<Integer, ArrayList> listarQuantidadeVisitasPorMes() {
         String sql = "CALL GRAFICO_QUANTIDADE_VISITAS_POR_MES();";
-        Map<Integer, ArrayList> retorno = new HashMap<>();
+        Map<Integer, ArrayList> retorno = new HashMap();
+
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             ResultSet resultado = stmt.executeQuery();
+
             while (resultado.next()) {
-                ArrayList linha = new ArrayList<>();
+                ArrayList linha = new ArrayList();
                 if (!retorno.containsKey(resultado.getInt("ANO"))) {
                     linha.add(resultado.getInt("MES"));
                     linha.add(resultado.getInt("QUANTIDADE_PESSOAS_POR_MES"));

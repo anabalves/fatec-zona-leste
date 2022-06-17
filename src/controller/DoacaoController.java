@@ -126,8 +126,6 @@ public class DoacaoController implements Initializable {
 
                 if (doacao.getNomeInstituicao().toLowerCase().indexOf(pesquisarPalavra) > -1) {
                     return true;
-                } else if (doacao.getCnpj().toLowerCase().indexOf(pesquisarPalavra) > -1) {
-                    return true;
                 } else {
                     return false;
                 }
