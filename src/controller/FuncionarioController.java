@@ -29,6 +29,7 @@ import util.GerenciadorTelas;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.text.Normalizer;
 import java.util.*;
 
 public class FuncionarioController implements Initializable {
@@ -116,9 +117,9 @@ public class FuncionarioController implements Initializable {
                     return true;
                 }
 
-                String pesquisarPalavra = newValue.toLowerCase();
+                String pesquisarPalavra = removeAccents(newValue.toLowerCase());
 
-                if (funcionario.getNome().toLowerCase().indexOf(pesquisarPalavra) > -1) {
+                if (removeAccents(funcionario.getNome()).toLowerCase().contains(pesquisarPalavra)) {
                     return true;
                 } else {
                     return false;
@@ -269,4 +270,10 @@ public class FuncionarioController implements Initializable {
         observableListFuncionario = FXCollections.observableArrayList(listFuncionario);
         tbFuncionario.setItems(observableListFuncionario);
     }
+
+    public static String removeAccents(String text) {
+        return text == null ? null : Normalizer.normalize(text, Normalizer.Form.NFD)
+                .replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
+    }
+
 }

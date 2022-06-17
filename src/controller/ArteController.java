@@ -30,6 +30,7 @@ import util.GerenciadorTelas;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.text.Normalizer;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -110,9 +111,9 @@ public class ArteController implements Initializable {
                     return true;
                 }
 
-                String pesquisarPalavra = newValue.toLowerCase();
+                String pesquisarPalavra = removeAccents(newValue.toLowerCase());
 
-                if (arte.getNomeObra().toLowerCase().indexOf(pesquisarPalavra) > -1) {
+                if (removeAccents(arte.getNomeObra()).toLowerCase().contains(pesquisarPalavra)) {
                     return true;
                 } else {
                     return false;
@@ -263,6 +264,11 @@ public class ArteController implements Initializable {
         listArte = arteDAO.listar();
         observableListArte = FXCollections.observableArrayList(listArte);
         tbArte.setItems(observableListArte);
+    }
+
+    public static String removeAccents(String text) {
+        return text == null ? null : Normalizer.normalize(text, Normalizer.Form.NFD)
+                .replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
     }
 
 }

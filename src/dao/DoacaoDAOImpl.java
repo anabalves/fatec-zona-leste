@@ -101,11 +101,11 @@ public class DoacaoDAOImpl implements DoacaoDAO {
 
     @Override
     public Doacao buscar(String nomeInstituicao) {
-        String sql = "SELECT `ID`,`NOME_INSTITUICAO`, `CNPJ`, `VALOR_DOADO`, `DATA_DOACAO`, `DESCRICAO` FROM `TB_DOACAO` WHERE `NOME_INSTITUICAO`=?;";
+        String sql = "SELECT `ID`,`NOME_INSTITUICAO`, `CNPJ`, `VALOR_DOADO`, `DATA_DOACAO`, `DESCRICAO` FROM `TB_DOACAO` WHERE LOWER(`NOME_INSTITUICAO`) LIKE LOWER(?);";
         Doacao doacao = new Doacao();
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setString(1, nomeInstituicao);
+            stmt.setString(1, "%" + nomeInstituicao + "%");
             ResultSet resultado = stmt.executeQuery();
             if (resultado.next()) {
                 doacao.setId(resultado.getLong("ID"));

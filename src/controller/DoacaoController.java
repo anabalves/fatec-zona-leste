@@ -36,6 +36,7 @@ import util.GerenciadorTelas;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.text.Normalizer;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -122,9 +123,9 @@ public class DoacaoController implements Initializable {
                     return true;
                 }
 
-                String pesquisarPalavra = newValue.toLowerCase();
+                String pesquisarPalavra = removeAccents(newValue.toLowerCase());
 
-                if (doacao.getNomeInstituicao().toLowerCase().indexOf(pesquisarPalavra) > -1) {
+                if (removeAccents(doacao.getNomeInstituicao()).toLowerCase().contains(pesquisarPalavra)) {
                     return true;
                 } else {
                     return false;
@@ -289,6 +290,11 @@ public class DoacaoController implements Initializable {
         listDoacao = doacaoDAO.listar();
         observableListDoacao = FXCollections.observableArrayList(listDoacao);
         tbDoacoa.setItems(observableListDoacao);
+    }
+
+    public static String removeAccents(String text) {
+        return text == null ? null : Normalizer.normalize(text, Normalizer.Form.NFD)
+                .replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
     }
 
 }
