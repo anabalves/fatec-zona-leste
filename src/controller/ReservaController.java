@@ -113,27 +113,7 @@ public class ReservaController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         reservaDAO.setConnection(connection);
         carregarTableViewReservas();
-
-        FilteredList<Reserva> reservaFilteredList = new FilteredList<>(observableListReserva, b -> true);
-        tfBuscarReserva.textProperty().addListener((observable, oldValue, newValue) -> {
-            reservaFilteredList.setPredicate(reserva -> {
-                if (newValue.isEmpty() || newValue.equals("") || newValue == null) {
-                    return true;
-                }
-
-                String pesquisarPalavra = removeAccents(newValue.toLowerCase());
-
-                if (removeAccents(reserva.getNome()).toLowerCase().contains(pesquisarPalavra)) {
-                    return true;
-                } else {
-                    return false;
-                }
-            });
-        });
-
-        SortedList<Reserva> reservaSortedList = new SortedList<>(reservaFilteredList);
-        reservaSortedList.comparatorProperty().bind(tbReserva.comparatorProperty());
-        tbReserva.setItems(reservaSortedList);
+        pesquisar();
 
         btnHome.setOnAction(event -> {
             try {
@@ -182,7 +162,31 @@ public class ReservaController implements Initializable {
 
         btnRecarregar.setOnAction(event -> {
             recarregarTableViewReservas();
+            pesquisar();
         });
+    }
+
+    private void pesquisar() {
+        FilteredList<Reserva> reservaFilteredList = new FilteredList<>(observableListReserva, b -> true);
+        tfBuscarReserva.textProperty().addListener((observable, oldValue, newValue) -> {
+            reservaFilteredList.setPredicate(reserva -> {
+                if (newValue.isEmpty() || newValue.equals("") || newValue == null) {
+                    return true;
+                }
+
+                String pesquisarPalavra = removeAccents(newValue.toLowerCase());
+
+                if (removeAccents(reserva.getNome()).toLowerCase().contains(pesquisarPalavra)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+        });
+
+        SortedList<Reserva> reservaSortedList = new SortedList<>(reservaFilteredList);
+        reservaSortedList.comparatorProperty().bind(tbReserva.comparatorProperty());
+        tbReserva.setItems(reservaSortedList);
     }
 
     private void carregarTableViewReservas() {
@@ -224,6 +228,7 @@ public class ReservaController implements Initializable {
                                 reserva = tbReserva.getSelectionModel().getSelectedItem();
                                 reservaDAO.deletar(reserva.getId());
                                 recarregarTableViewReservas();
+                                pesquisar();
                             }
                         });
 

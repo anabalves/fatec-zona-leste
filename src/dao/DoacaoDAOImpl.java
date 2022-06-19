@@ -7,9 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -119,34 +117,6 @@ public class DoacaoDAOImpl implements DoacaoDAO {
             Logger.getLogger(DoacaoDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return doacao;
-    }
-
-    @Override
-    public Map<Integer, ArrayList> listarQuantidadeVisitasPorMes() {
-        String sql = "CALL GRAFICO_QUANTIDADE_VISITAS_POR_MES();";
-        Map<Integer, ArrayList> retorno = new HashMap();
-
-        try {
-            PreparedStatement stmt = connection.prepareStatement(sql);
-            ResultSet resultado = stmt.executeQuery();
-
-            while (resultado.next()) {
-                ArrayList linha = new ArrayList();
-                if (!retorno.containsKey(resultado.getInt("ANO"))) {
-                    linha.add(resultado.getInt("MES"));
-                    linha.add(resultado.getInt("QUANTIDADE_PESSOAS_POR_MES"));
-                    retorno.put(resultado.getInt("ANO"), linha);
-                } else {
-                    ArrayList linhaNova = retorno.get(resultado.getInt("ANO"));
-                    linhaNova.add(resultado.getInt("MES"));
-                    linhaNova.add(resultado.getInt("QUANTIDADE_PESSOAS_POR_MES"));
-                }
-            }
-            return retorno;
-        } catch (SQLException ex) {
-            Logger.getLogger(DoacaoDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return retorno;
     }
 
 }

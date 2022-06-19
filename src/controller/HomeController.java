@@ -1,6 +1,6 @@
 package controller;
 
-import dao.DoacaoDAOImpl;
+import dao.ReservaDAOImpl;
 import database.Database;
 import database.DatabaseFactory;
 import javafx.event.ActionEvent;
@@ -16,17 +16,12 @@ import java.util.*;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
-import model.Doacao;
 import util.GerenciadorTelas;
 
 import java.io.IOException;
@@ -68,7 +63,7 @@ public class HomeController implements Initializable {
 
     private final Database database = DatabaseFactory.getDatabase("mysql");
     private final Connection connection = database.conectar();
-    private final DoacaoDAOImpl doacaoDAO = new DoacaoDAOImpl();
+    private final ReservaDAOImpl reservaDAO = new ReservaDAOImpl();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -78,8 +73,8 @@ public class HomeController implements Initializable {
         observableListMeses.addAll(Arrays.asList(arrayMeses));
 
         categoryAxis.setCategories(observableListMeses);
-        doacaoDAO.setConnection(connection);
-        Map<Integer, ArrayList> dados = doacaoDAO.listarQuantidadeVisitasPorMes();
+        reservaDAO.setConnection(connection);
+        Map<Integer, ArrayList> dados = reservaDAO.listarQuantidadeVisitasPorMes();
         for (Map.Entry<Integer, ArrayList> dadosItem : dados.entrySet()) {
             XYChart.Series<String, Integer> series = new XYChart.Series<>();
             series.setName(dadosItem.getKey().toString());

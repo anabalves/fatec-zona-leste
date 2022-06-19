@@ -115,27 +115,7 @@ public class DoacaoController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         doacaoDAO.setConnection(connection);
         carregarTableViewDoacoes();
-
-        FilteredList<Doacao> doacaoFilteredList = new FilteredList<>(observableListDoacao, b -> true);
-        tfBuscarDoacao.textProperty().addListener((observable, oldValue, newValue) -> {
-            doacaoFilteredList.setPredicate(doacao -> {
-                if (newValue.isEmpty() || newValue.equals("") || newValue == null) {
-                    return true;
-                }
-
-                String pesquisarPalavra = removeAccents(newValue.toLowerCase());
-
-                if (removeAccents(doacao.getNomeInstituicao()).toLowerCase().contains(pesquisarPalavra)) {
-                    return true;
-                } else {
-                    return false;
-                }
-            });
-        });
-
-        SortedList<Doacao> doacaoSortedList = new SortedList<>(doacaoFilteredList);
-        doacaoSortedList.comparatorProperty().bind(tbDoacoa.comparatorProperty());
-        tbDoacoa.setItems(doacaoSortedList);
+        pesquisar();
 
         btnImprimir.setOnAction(event -> {
             try {
@@ -197,7 +177,31 @@ public class DoacaoController implements Initializable {
 
         btnRecarregar.setOnAction(event -> {
             recarregarTableViewDoacoes();
+            pesquisar();
         });
+    }
+
+    private void pesquisar() {
+        FilteredList<Doacao> doacaoFilteredList = new FilteredList<>(observableListDoacao, b -> true);
+        tfBuscarDoacao.textProperty().addListener((observable, oldValue, newValue) -> {
+            doacaoFilteredList.setPredicate(doacao -> {
+                if (newValue.isEmpty() || newValue.equals("") || newValue == null) {
+                    return true;
+                }
+
+                String pesquisarPalavra = removeAccents(newValue.toLowerCase());
+
+                if (removeAccents(doacao.getNomeInstituicao()).toLowerCase().contains(pesquisarPalavra)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+        });
+
+        SortedList<Doacao> doacaoSortedList = new SortedList<>(doacaoFilteredList);
+        doacaoSortedList.comparatorProperty().bind(tbDoacoa.comparatorProperty());
+        tbDoacoa.setItems(doacaoSortedList);
     }
 
     private void carregarTableViewDoacoes() {
@@ -239,6 +243,7 @@ public class DoacaoController implements Initializable {
                                 doacao = tbDoacoa.getSelectionModel().getSelectedItem();
                                 doacaoDAO.deletar(doacao.getId());
                                 recarregarTableViewDoacoes();
+                                pesquisar();
                             }
                         });
 

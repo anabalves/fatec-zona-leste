@@ -2,7 +2,9 @@ package dao;
 
 import model.Reserva;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public interface ReservaDAO {
 
@@ -11,5 +13,8 @@ public interface ReservaDAO {
     boolean deletar(Long id);
     List<Reserva> listar();
     Reserva buscar(String nome);
+
+    Map<Integer, ArrayList> listarQuantidadeVisitasPorMes();
+
 
 }

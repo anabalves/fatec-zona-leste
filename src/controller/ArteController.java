@@ -103,27 +103,7 @@ public class ArteController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         arteDAO.setConnection(connection);
         carregarTableViewArtes();
-
-        FilteredList<Arte> arteFilteredList = new FilteredList<>(observableListArte, b -> true);
-        tfBuscarArte.textProperty().addListener((observable, oldValue, newValue) -> {
-            arteFilteredList.setPredicate(arte -> {
-                if (newValue.isEmpty() || newValue.equals("") || newValue == null) {
-                    return true;
-                }
-
-                String pesquisarPalavra = removeAccents(newValue.toLowerCase());
-
-                if (removeAccents(arte.getNomeObra()).toLowerCase().contains(pesquisarPalavra)) {
-                    return true;
-                } else {
-                    return false;
-                }
-            });
-        });
-
-        SortedList<Arte> arteSortedList = new SortedList<>(arteFilteredList);
-        arteSortedList.comparatorProperty().bind(tbArte.comparatorProperty());
-        tbArte.setItems(arteSortedList);
+        pesquisar();
 
         btnHome.setOnAction(event -> {
             try {
@@ -172,7 +152,31 @@ public class ArteController implements Initializable {
 
         btnRecarregar.setOnAction(event -> {
             recarregarTableViewArtes();
+            pesquisar();
         });
+    }
+
+    private void pesquisar() {
+        FilteredList<Arte> arteFilteredList = new FilteredList<>(observableListArte, b -> true);
+        tfBuscarArte.textProperty().addListener((observable, oldValue, newValue) -> {
+            arteFilteredList.setPredicate(arte -> {
+                if (newValue.isEmpty() || newValue.equals("") || newValue == null) {
+                    return true;
+                }
+
+                String pesquisarPalavra = removeAccents(newValue.toLowerCase());
+
+                if (removeAccents(arte.getNomeObra()).toLowerCase().contains(pesquisarPalavra)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+        });
+
+        SortedList<Arte> arteSortedList = new SortedList<>(arteFilteredList);
+        arteSortedList.comparatorProperty().bind(tbArte.comparatorProperty());
+        tbArte.setItems(arteSortedList);
     }
 
     private void carregarTableViewArtes() {
@@ -213,6 +217,7 @@ public class ArteController implements Initializable {
                                 arte = tbArte.getSelectionModel().getSelectedItem();
                                 arteDAO.deletar(arte.getId());
                                 recarregarTableViewArtes();
+                                pesquisar();
                             }
                         });
 

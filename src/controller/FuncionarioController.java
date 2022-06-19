@@ -109,28 +109,7 @@ public class FuncionarioController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         funcionarioDAO.setConnection(connection);
         carregarTableViewFuncionarios();
-
-        FilteredList<Funcionario> funcionarioFilteredList = new FilteredList<>(observableListFuncionario, b -> true);
-        tfBuscarFuncionario.textProperty().addListener((observable, oldValue, newValue) -> {
-            funcionarioFilteredList.setPredicate(funcionario -> {
-                if (newValue.isEmpty() || newValue.equals("") || newValue == null) {
-                    return true;
-                }
-
-                String pesquisarPalavra = removeAccents(newValue.toLowerCase());
-
-                if (removeAccents(funcionario.getNome()).toLowerCase().contains(pesquisarPalavra)) {
-                    return true;
-                } else {
-                    return false;
-                }
-
-            });
-        });
-
-        SortedList<Funcionario> funcionarioSortedList = new SortedList<>(funcionarioFilteredList);
-        funcionarioSortedList.comparatorProperty().bind(tbFuncionario.comparatorProperty());
-        tbFuncionario.setItems(funcionarioSortedList);
+        pesquisar();
 
         btnHome.setOnAction(event -> {
             try {
@@ -179,7 +158,33 @@ public class FuncionarioController implements Initializable {
 
         btnRecarregar.setOnAction(event -> {
             recarregarTableViewFuncionarios();
+            pesquisar();
         });
+    }
+
+    private void pesquisar() {
+
+        FilteredList<Funcionario> funcionarioFilteredList = new FilteredList<>(observableListFuncionario, b -> true);
+        tfBuscarFuncionario.textProperty().addListener((observable, oldValue, newValue) -> {
+            funcionarioFilteredList.setPredicate(funcionario -> {
+                if (newValue.isEmpty() || newValue.equals("") || newValue == null) {
+                    return true;
+                }
+
+                String pesquisarPalavra = removeAccents(newValue.toLowerCase());
+
+                if (removeAccents(funcionario.getNome()).toLowerCase().contains(pesquisarPalavra)) {
+                    return true;
+                } else {
+                    return false;
+                }
+
+            });
+        });
+
+        SortedList<Funcionario> funcionarioSortedList = new SortedList<>(funcionarioFilteredList);
+        funcionarioSortedList.comparatorProperty().bind(tbFuncionario.comparatorProperty());
+        tbFuncionario.setItems(funcionarioSortedList);
     }
 
     private void carregarTableViewFuncionarios() {
@@ -218,6 +223,7 @@ public class FuncionarioController implements Initializable {
                                 funcionario = tbFuncionario.getSelectionModel().getSelectedItem();
                                 funcionarioDAO.deletar(funcionario.getId());
                                 recarregarTableViewFuncionarios();
+                                pesquisar();
                             }
                         });
 
