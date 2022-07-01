@@ -1,21 +1,9 @@
-<p align="center">
-  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/CTRLMarcws/PetsAnatomy?color=%2304D361">
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/CTRLMarcws/PetsAnatomy">
-  <a href="https://github.com/CTRLMarcws/PetsAnatomy/commits/main">
-    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/CTRLMarcws/PetsAnatomy">
-  </a>
-   <img alt="License" src="https://img.shields.io/badge/license-MIT-brightgreen">
-   <a href="https://github.com/CTRLMarcws/PetsAnatomy/stargazers">
-    <img alt="Stargazers" src="https://img.shields.io/github/stars/CTRLMarcws/PetsAnatomy?style=social">
-  </a>
-</p>
-
 <h1 align="center">
     <img alt="PetsAnatomy" title="#PetsAnatomy" src="./.github/banner.png"/>
 </h1>
 
 <h3 align="center"> 
-	<b>🚧  PetsAnatomy Em Construção 🏗️  🚧</b>
+	<b> PetsAnatomy </b>
   <img alt="GifPets" title="#GifPets" src="./.github/pets-outline.gif"/>
 </h3>
 
@@ -107,15 +95,8 @@ As seguintes ferramentas foram usadas na construção do projeto:
   </tr>
 </table>
 
-## 💪 Como contribuir para o projeto
-
-1. Faça um **fork** do projeto.
-2. Crie uma nova branch com as suas alterações: `git checkout -b my-feature`
-3. Salve as alterações e crie uma mensagem de commit contando o que você fez: `git commit -m "feature: My new feature"`
-4. Envie as suas alterações: `git push origin my-feature`
-
 ---
 
 ## 📝 Licença
 
-Este projeto esta sobe a licença [MIT](/LICENSE).
+Este projeto esta sobe a licença [MIT](/20212-programacao-orientada-a-objetos/src/PetsAnatomy/LICENSE).
