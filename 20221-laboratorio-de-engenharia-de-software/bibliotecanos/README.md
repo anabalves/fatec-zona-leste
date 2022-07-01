@@ -88,4 +88,4 @@ Esse projeto foi desenvolvido com as seguintes tecnologias e ferramentas:
 
 ## 📝 Licença
 
-Este projeto esta sobe a licença [MIT](/LICENSE).
+Este projeto esta sobe a licença [MIT](/20221-laboratorio-de-engenharia-de-software/bibliotecanos/LICENSE).
