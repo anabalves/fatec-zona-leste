@@ -23,6 +23,7 @@ import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import java.util.Arrays;
 
@@ -71,7 +72,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().antMatchers("/api/auth/**", "/h2-console/**", "/swagger-ui.html/**", "/swagger-ui/**", "/v2/api-docs/**").permitAll()
+                .authorizeRequests().antMatchers("/api/auth/**", "/h2-console/**", "**/swagger-resources/**", "/swagger-resources/**", "/swagger-ui.html", "/swagger-ui/**", "/v2/api-docs/**", "/webjars/**").permitAll()
                 .antMatchers("/api/usuarios/**", "/api/livros/**", "/api/generos/**", "/api/editoras/**", "/api/emprestimos-devolucoes/**").permitAll()
                 .anyRequest().authenticated();
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
@@ -87,6 +88,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         corsConfig.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
         source.registerCorsConfiguration("/**", corsConfig);
         return new CorsFilter(source);
+    }
+
+    @Bean
+    public InternalResourceViewResolver defaultViewResolver() {
+        return new InternalResourceViewResolver();
     }
 
 }

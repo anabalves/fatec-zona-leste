@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
 
-import com.fatec.bibliotecanos.Validator;
+import com.fatec.bibliotecanos.common.ApiValidations;
 import com.fatec.bibliotecanos.domain.model.RefreshToken;
 import com.fatec.bibliotecanos.domain.model.Role;
 import com.fatec.bibliotecanos.domain.model.Usuario;
@@ -25,6 +25,7 @@ import com.fatec.bibliotecanos.api.dto.response.MessageResponse;
 import com.fatec.bibliotecanos.api.dto.response.TokenRefreshResponse;
 import com.fatec.bibliotecanos.domain.service.RefreshTokenServiceImpl;
 import com.fatec.bibliotecanos.domain.service.UsuarioDetailsImpl;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -40,6 +41,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/auth")
+@Api(value = "/api/auth", tags = "Bibliotecanos API", description = "API Para Gerenciamento de Bibliotecas")
 public class AuthController {
 
     @Autowired
@@ -108,32 +110,32 @@ public class AuthController {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: O CPF já foi cadastrado!"));
         }
 
-        if (!Validator.validarEmailFatec(signUpRequest.getEmail())) {
+        if (!ApiValidations.validarEmailFatec(signUpRequest.getEmail())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: O e-mail fatec é inválido!"));
         }
 
-        if (!Validator.validarEmailAlternativo(signUpRequest.getEmailAlternativo())) {
+        if (!ApiValidations.validarEmailAlternativo(signUpRequest.getEmailAlternativo())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: O e-mail alternativo é inválido!"));
         }
 
-        if (!Validator.validarCPF(signUpRequest.getCpf())) {
+        if (!ApiValidations.validarCPF(signUpRequest.getCpf())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: O CPF é inválido!"));
         }
 
-        if (!Validator.validarTelefone(signUpRequest.getTelefone())) {
+        if (!ApiValidations.validarTelefone(signUpRequest.getTelefone())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: O Telefone é inválido!"));
         }
 
-        if (!Validator.validarCep(signUpRequest.getCep())) {
+        if (!ApiValidations.validarCep(signUpRequest.getCep())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: O CEP é inválido!"));
         }
 
         Usuario usuario = new Usuario(
                 signUpRequest.getNome(),
                 signUpRequest.getSobrenome(),
-                Validator.removeCaracteresEspeciais(signUpRequest.getCpf()),
-                Validator.removeCaracteresEspeciais(signUpRequest.getTelefone()),
-                Validator.removeCaracteresEspeciais(signUpRequest.getCep()),
+                ApiValidations.removeCaracteresEspeciais(signUpRequest.getCpf()),
+                ApiValidations.removeCaracteresEspeciais(signUpRequest.getTelefone()),
+                ApiValidations.removeCaracteresEspeciais(signUpRequest.getCep()),
                 signUpRequest.getEndereco(),
                 signUpRequest.getNumeroEndereco(),
                 signUpRequest.getComplemento(),

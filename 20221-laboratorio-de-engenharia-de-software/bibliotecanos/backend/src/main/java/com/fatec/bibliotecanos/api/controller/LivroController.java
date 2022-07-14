@@ -4,6 +4,7 @@ import com.fatec.bibliotecanos.api.dto.LivroDTO;
 import com.fatec.bibliotecanos.api.dto.response.RelatorioAcervoResponse;
 import com.fatec.bibliotecanos.api.dto.response.RelatorioUsuariosResponse;
 import com.fatec.bibliotecanos.domain.service.LivroServiceImpl;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/livros")
+@Api(value = "/api/livros", tags = "Bibliotecanos API", description = "API Para Gerenciamento de Bibliotecas")
 public class LivroController {
 
     @Autowired

@@ -2,6 +2,7 @@ package com.fatec.bibliotecanos.api.controller;
 
 import com.fatec.bibliotecanos.api.dto.EditoraDTO;
 import com.fatec.bibliotecanos.domain.service.EditoraServiceImpl;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +15,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping(value = "/api/editoras")
+@Api(value = "/api/editoras", tags = "Bibliotecanos API", description = "API Para Gerenciamento de Bibliotecas")
 public class EditoraController {
 
     @Autowired

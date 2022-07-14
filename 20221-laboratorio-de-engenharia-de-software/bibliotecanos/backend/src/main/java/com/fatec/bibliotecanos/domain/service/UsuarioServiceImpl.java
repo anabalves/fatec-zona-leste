@@ -1,6 +1,6 @@
 package com.fatec.bibliotecanos.domain.service;
 
-import com.fatec.bibliotecanos.Validator;
+import com.fatec.bibliotecanos.common.ApiValidations;
 import com.fatec.bibliotecanos.api.dto.UsuarioDTO;
 import com.fatec.bibliotecanos.api.dto.request.AtualizarSenhaRequest;
 import com.fatec.bibliotecanos.api.dto.request.AtualizarUsuarioRequest;
@@ -56,8 +56,8 @@ public class UsuarioServiceImpl implements UsuarioService {
             Usuario entity = usuarioRepository.getOne(id);
             entity.setNome(dto.getNome());
             entity.setSobrenome(dto.getSobrenome());
-            entity.setTelefone(Validator.removeCaracteresEspeciais(dto.getTelefone()));
-            entity.setCep(Validator.removeCaracteresEspeciais(dto.getCep()));
+            entity.setTelefone(ApiValidations.removeCaracteresEspeciais(dto.getTelefone()));
+            entity.setCep(ApiValidations.removeCaracteresEspeciais(dto.getCep()));
             entity.setEndereco(dto.getEndereco());
             entity.setNumeroEndereco(dto.getNumeroEndereco());
             entity.setComplemento(dto.getComplemento());

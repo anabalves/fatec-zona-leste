@@ -7,7 +7,8 @@ import com.fatec.bibliotecanos.api.dto.request.RoleToUsuarioRequest;
 import com.fatec.bibliotecanos.api.dto.response.MessageResponse;
 import com.fatec.bibliotecanos.api.dto.response.RoleToUsuarioResponse;
 import com.fatec.bibliotecanos.domain.service.UsuarioServiceImpl;
-import com.fatec.bibliotecanos.Validator;
+import com.fatec.bibliotecanos.common.ApiValidations;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +20,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/api/usuarios")
+@Api(value = "/api/usuarios", tags = "Bibliotecanos API", description = "API Para Gerenciamento de Bibliotecas")
 public class UsuarioController {
 
     @Autowired
@@ -41,15 +43,15 @@ public class UsuarioController {
     @PutMapping(value = "/{id}")
     @PreAuthorize("hasRole('BIBLIOTECARIO') or hasRole('ADMIN') or hasRole('USUARIO')")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody @Valid AtualizarUsuarioRequest dto) {
-        if (!Validator.validarEmailAlternativo(dto.getEmailAlternativo())) {
+        if (!ApiValidations.validarEmailAlternativo(dto.getEmailAlternativo())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: O e-mail alternativo é inválido!"));
         }
 
-        if (!Validator.validarTelefone(dto.getTelefone())) {
+        if (!ApiValidations.validarTelefone(dto.getTelefone())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: O Telefone é inválido!"));
         }
 
-        if (!Validator.validarCep(dto.getCep())) {
+        if (!ApiValidations.validarCep(dto.getCep())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: O CEP é inválido!"));
         }
 

@@ -5,6 +5,7 @@ import com.fatec.bibliotecanos.api.dto.UsuarioDTO;
 import com.fatec.bibliotecanos.api.dto.response.*;
 import com.fatec.bibliotecanos.domain.service.ReservaEmprestimoDevolucaoServiceImpl;
 import com.fatec.bibliotecanos.domain.service.UsuarioServiceImpl;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/reserva-emprestimos-devolucoes")
+@Api(value = "/api/reserva-emprestimos-devolucoes", tags = "Bibliotecanos API", description = "API Para Gerenciamento de Bibliotecas")
 public class ReservaEmprestimoDevolucaoController {
 
     @Autowired

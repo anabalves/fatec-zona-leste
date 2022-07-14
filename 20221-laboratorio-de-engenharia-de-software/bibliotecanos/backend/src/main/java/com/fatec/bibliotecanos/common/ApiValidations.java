@@ -1,8 +1,8 @@
-package com.fatec.bibliotecanos;
+package com.fatec.bibliotecanos.common;
 
 import java.util.InputMismatchException;
 
-public class Validator {
+public class ApiValidations {
 
     public static boolean validarEmailFatec(String emailFatec) {
         if (validarEmailAlternativo(emailFatec)) {
